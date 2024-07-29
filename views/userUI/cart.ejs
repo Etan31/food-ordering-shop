@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" />
+
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="https://kit.fontawesome.com/6926c4a9ef.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://kit.fontawesome.com/6926c4a9ef.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/fontawesome.min.css" />
+  <title>Cart</title>
+  <link rel="stylesheet" href="/css/cart.css">
+
+</head>
+
+<body>
+
+  <main class="main">
+    <!-- Include the sidebar -->
+    <%- include('navbar.ejs') %>
+
+    <div class="data-wrapper1">
+
+      <div class="modal">
+
+        <h1>Order List</h1>
+        <hr class="horizontal-line">
+
+        <div class="orderTable">
+          <table>
+            <thead>
+              <tr>
+            
+                <th>Foods</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+         
+              <% orders.forEach(foods => { %>
+                <tr>
+                    
+                    <td><%= foods.name %> <br> <%= foods.shopname %></td>
+                    <!-- Add a data attribute to store the original price -->
+                    <td> <input type="number" class="quantity" data-price="<%= foods.price %>" value="<%= foods.quantity %>" onchange="handleQuantityChange(event, '<%= foods.food_id %>')"></td>
+                    <td class="price"><%= foods.price %></td>
+                    <td class="deleteBtn" onclick="deleteBtn('<%= foods.food_id%>')"><i class="fa-solid fa-trash"></i></td>
+                </tr>
+            <% }) %>
+            
+       
+            
+
+
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="horizontal-line">
+        <div class="totals">
+          <label class="total" for="">Total:</label>
+          <label class="total"  id="totalPrice"> <%= totalPrice %> Pesos</label>
+        </div>
+
+        <div class="button-wrapper">
+          <button class="proceedBtn" onclick="proceed()" style="background-color: #F9E2A7;">Next</button>
+
+        </div>
+
+      </div>
+
+      <div class="modal1" id="modal1" style="display: none;">
+
+        <form action="/save-order" class="orderForm" method="post">
+          <div class="forms">
+            <h1> FILL OUT THIS FORM</h1>
+            <hr class="horizontal-line" style="width: 100%;">
+
+            <div class="formHead">
+
+              
+              <div>
+                <input type="radio" id="deliveryCheckbox" name="mode" value="delivery" style="width: 20px; height:20px;">
+                <label for="deliveryCheckbox">Deliver</label>
+              </div>
+              <div>
+                <input type="radio" id="pickupCheckbox" name="mode" value="pick-up" style="width: 20px; height:20px;">
+                <label for="pickupCheckbox">Pick up</label>
+              </div>
+
+            </div>
+
+            <div class="formtoFill">
+              <div class="formlabel" id="deliveryLabels">
+                <label for="deliveryDateTime">Date and Time:</label>
+                <label for="name">Name:</label>
+                <label for="contactNumber">Contact Number:</label>
+                <label for="deliveryAddress">Address:</label>
+               
+              </div>
+              <div class="formInput" id="deliveryInputs">
+                <input type="datetime-local" id="deliveryDateTime" name="date_time">
+                <input type="text" id="name" name="name">
+                <input type="number" id="contactNumber" name="contactNumber">
+                <input type="text" id="deliveryAddress" name="deliveryAddress">
+             
+              </div>
+             
+
+            </div>
+            <hr class="horizontal-line" style="width: 100%;">
+            <div class="uploadID">
+              <label for="" class="formlabel">Upload Valid I.D</label>
+              <input type="file">
+
+            </div>
+
+            <div class="button-wrapper">
+              <button class="proceedBtn" type="button" id="cancelButton">Cancel</button>
+              <button class="proceedBtn" type="submit" onclick="submitBtn()" style="background-color: #F9E2A7;">Submit</button>
+
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+
+
+
+
+<div class="modal1" id="modal2" style="display: none;">
+  <div class="forReview">
+    <h1>Total Payment:</h1>
+
+    <div class="review">
+      <div class="formlabel" >
+        <label for="orderID"> Order ID:</label>
+       <label for="deliveryDateTime">Foods:</label>
+       <label for="name">Delivery Fee:</label>
+       <label for="total" style="font-weight: bold;">Total:</label>
+  </div>
+
+  <div class="formInput" style="text-align: center;">
+    <input type="text" value="000123">
+    <input type="text" value="568 pesos">
+    <input type="text"   value="50 pesos">
+    <input type="text"   value="618 pesos">
+  
+  </div>
+
+
+    </div>
+
+     
+    <button class="proceedBtn" style="background-color: #F9E2A7;" onclick="ok()">OK</button>
+       
+      </div>
+    
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="../js/cart.js"></script>
+
+</body>
+
+</html>

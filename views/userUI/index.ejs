@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/style.css">
+	<link href="https://fonts.googleapis.com/css2? 
+	family=Ubuntu+Mono&display=swap" rel="stylesheet">
+	<title>Home</title>
+</head>
+
+<body>
+
+	<hr>
+	<nav id="navbar">
+		<div class="logo"> <img src="/img/logo.png"> </div>
+		<ul id="navcontent">
+
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Menu</a></li>
+			<li><a href="order.ejs">Order</a></li>
+			<li><a href="contact.ejs">About</a></li>
+			<li><a href="login.ejs">LogOut</a></li>
+
+		</ul>
+	</nav>
+
+	<hr>
+	<h1 id="top3">Welcome to BufPay</h1>
+
+	<div id="search-container">
+		<input type="text" id="search-box" placeholder="Search...">
+		<button onclick="search()" id="search-button">Search</button>
+	</div>
+
+	<div class="image-grid">
+
+		<div class="image">
+			<img src="images/chicken roll.jpg" alt="Image 1">
+			<p>Chicken Roll</p>
+			<p>₱800.00 per tray</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/fish fillet.jpg" alt="Image 2">
+			<p>Fish Fillet</p>
+			<p>₱800.00 per tray</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/lumpia shanghai.jpg" alt="Image 3">
+			<p>Lumpia Shanghai</p>
+			<p>₱700.00 per 100pcs</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/meatballs.jpg" alt="Image 4">
+			<p>Meatballs</p>
+			<p>₱700.00 per 100pcs</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/pancit sotanghon.jpg" alt="Image 5">
+			<p>Pancit Sotanghon</p>
+			<p>₱700.00 per tray</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/beef caldereta.jpg" alt="Image 3">
+			<p>Beef Caldereta</p>
+			<p>₱900.00 per tray</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/beef steak.jpg" alt="Image 4">
+			<p>Beef Steak</p>
+			<p>₱850.00 per tray</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/chicken curry.jpg" alt="Image 5">
+			<p>Chicken Curry</p>
+			<p>₱000.00</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/fried pork ribs.jpg" alt="Image 5">
+			<p>Fried Pork Ribs</p>
+			<p>₱700.00</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/pork sisig.jpg" alt="Image 5">
+			<p>Pork Sisig</p>
+			<p>₱800.00 per tray</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/porksteak.jpg" alt="Image 5">
+			<p>Pork Steak</p>
+			<p>₱800.00 per tray</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+	</div>
+	<!-- Add more image divs as needed -->
+	</div>
+
+	<hr>
+	<h2 id="top3">FIESTA BUNDLE</h2>
+	<div class="image-grid">
+		<div class="image">
+			<img src="images/fiesta bundle 1.jpg" alt="Image 1">
+			<p>Fiesta Bundle 1</p>
+			<p>₱1800.00 per tray</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/fiesta bundle 2.jpg" alt="Image 2">
+			<p>Fiesta Bundle 2</p>
+			<p>₱1800.00 per tray</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images" alt="Image 3">
+			<p>_____________</p>
+			<p>₱000.00 </p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images" alt="Image 4">
+			<p>_____________</p>
+			<p>₱000.00 s</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images" alt="Image 5">
+			<p>_____________</p>
+			<p>₱000.00</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+	</div>
+
+	<hr>
+	<h3 id="top3">CAKES</h3>
+	<div class="image-grid">
+		<div class="image">
+			<img src="images/butter cake.jpg" alt="Image 1">
+			<p>Butter Cake</p>
+			<p>₱270.00</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/cassava cake.jpg" alt="Image 2">
+			<p>Cassava Cake</p>
+			<p>₱290.00</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/chocolate cake.jpg" alt="Image 3">
+			<p>Chocolate Cake</p>
+			<p>₱270.00</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/butter cookies.jpg" alt="Image 4">
+			<p>Butter Cookies</p>
+			<p>₱55.00 per pack</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+		<div class="image">
+			<img src="images/macaroons.jpg" alt="Image 5">
+			<p>Macaroons</p>
+			<p>₱150.00 per 30pcs</p>
+			<button class="add-to-order-button" onclick="addToOrder()">Add to Order</button>
+		</div>
+
+		<script>
+			// Sample function to add the product to the order
+			function addToOrder() {
+				// Assuming a simple order object
+				var order = [];
+				// Sample product details
+				var product = {
+					name: 'Example Product',
+					price: 19.99
+				};
+				// Add the product to the order
+				order.push(product);
+				// Display a message (you may want to update UI dynamically)
+				alert('Added to order!');
+				// Optional: Log the current cart state
+				console.log('Current Order:', Order);
+			}
+		</script>
+		<script>
+			// Sample function to perform a search
+			function search() {
+				// Get the search query from the input field
+				var searchQuery = document.getElementById('searchInput').value;
+				// Perform a basic search (replace this with your actual search logic)
+				// For this example, let's just display the search query in an alert
+				alert('Searching for: ' + searchQuery);
+			}
+		</script>
+
+		<script>
+			// JavaScript function to handle the search action
+			function search() {
+				// Get the value from the search box
+				var searchTerm = document.getElementById('search-box').value;
+				// Perform some action with the search term (for demonstration, just an alert)
+				alert('Searching for: ' + searchTerm);
+			}
+		</script>
+	</div>
+
+	<footer>Copyright © 2023 OnlineFoodShop.
+		All Rights are reserved</footer>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" />
+
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="https://kit.fontawesome.com/6926c4a9ef.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://kit.fontawesome.com/6926c4a9ef.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/fontawesome.min.css" />
+  <title>ORDER</title>
+  <link rel="stylesheet" href="/css/order.css">
+
+</head>
+
+<body>
+
+  <main class="main">
+    <!-- Include the sidebar -->
+    <%- include('navbar.ejs') %>
+
+    <div class="data-wrapper1">
+
+      <div class="modal">
+
+        <h1>My Order</h1>
+    
+
+        <div class="orderTable">
+          <table>
+           
+            <tbody>
+         
+     
+              <% 
+              let totalSum = 0;
+              user_orders.forEach(order => {
+                totalSum += parseInt(order.total_payment);
+              });
+            %>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Total Payment</th>
+                  <th>Shop Name</th>
+                  <th>Mode of Delivery</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% user_orders.forEach(order => { %>
+                  <tr>
+                    <td><%= order.name %></td>
+                    <td><%= order.total_payment %></td>
+                    <td><%= order.shopname %></td>
+                    <td><%= order.mode_delivery %></td>
+                    <td><%= order.status %></td>
+                  </tr>
+                <% }) %>
+                <tr>
+                  <td colspan="4"><strong>Total Payment</strong></td>
+                  <td><%= totalSum %></td>
+                </tr>
+              </tbody>
+            </table>
+            
+       
+            
+
+
+            </tbody>
+          </table>
+        </div>
+
+        
+
+  
+
+
+
+
+
+
+    </div>
+    
+</div>
+
+  </main>
+
+
+
+</body>
+
+</html>

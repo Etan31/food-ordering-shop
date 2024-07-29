@@ -1,0 +1,377 @@
+/*CSS Reset*/
+*{
+    margin:0px;
+    padding:0px;
+}
+
+
+
+/*Navbar Functionality*/
+#navbar{
+    display:flex;
+    flex-direction: row;
+    background-color: #faebba;
+    height: 10%;
+    width: 100%;
+    font-family: 'Ubuntu Mono', monospace;
+ top: 0;
+   /* border-radius:15px; */
+   z-index: 1;
+}
+
+
+/*Navbar content functionality*/
+#navcontent{
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+position: relative;
+margin-top: 10px;
+color: black;
+gap: 30%;
+}
+
+
+/*Navbar content styling*/
+ul li{
+    list-style: none;
+padding-top: 10px;
+padding-bottom: 5px;
+
+    border-radius: 20px;
+    position: relative;
+   font-size: clamp(12px, 2vw, 18px);
+    
+}
+ul li a{
+    padding: 1px;
+    color:black ;
+    text-decoration: none;
+    border-radius:10px;
+}
+ul li a:hover{
+    background-color: red;
+    border-radius: 10px;
+}
+.logo{
+    display: flex;
+    position: relative;
+    margin-left: 10px;
+
+}
+img{
+    display:flex;
+    position: relative;
+    width: 50px;
+    height:50px;
+  margin-left: 0;
+   
+    margin-bottom: 10px;
+}
+
+
+
+main{
+    background-color: #fff;
+}
+
+h1{
+   justify-self: center;
+   align-self: center;
+   
+}
+
+
+
+
+
+
+
+
+
+/*Header Styling*/
+header{
+    margin-left: auto;
+    margin-right: auto;
+}
+h1{
+    color:rgb(245, 10, 10);
+    text-align:center;
+    font-family: 'Ubuntu Mono', monospace;
+ 
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+    margin-left: auto;
+    margin-right: auto;
+  
+}
+.header{
+    display: flex;
+    width: 100%;
+   
+}
+.logo{
+    display: flex;
+    position: relative;
+    margin-left: 10px;
+
+}
+#top1{
+    text-align:center;
+    color:rgb(5, 5, 5);
+    font-size:21px;
+    font-family: 'Ubuntu Mono', monospace;
+}
+/* Navigation bar styling*/
+
+
+/* ul li a:hover{
+    background-color: red;
+    border-radius: 10px;
+} */
+
+				/* Basic CSS styles for the search box */
+				#search-container {
+					text-align: center;
+					margin: 20px;
+				}
+		
+				#search-box {
+					padding: 10px;
+					width: 50%;
+					border: 1px solid #0f0f0e;
+					border-radius: 5px;
+                    background-color: beige;
+				}
+		
+				#search-button {
+					padding: 10px;
+					background-color: #faebba;
+					color: rgb(6, 6, 6);
+					border: none;
+					border-radius: 5px;
+					cursor: pointer;
+				}
+
+/* website background image designing */
+#container1{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height:63vh;
+    background: url("images/janier's.jpg") no-repeat center center/cover;
+    width: 100vw;
+}
+
+/*Setting the background image using before pseudo selector*/ 
+/* #container1::before{
+    content:'';
+    background: url("images/janier's.jpg") no-repeat center center/cover;
+    width: 100vw;
+    height:59vh;
+    position: absolute;
+    top:0px;
+    left: 0px;
+    font-family: 'Ubuntu Mono', monospace;
+    margin-right:45px;
+    font-weight: bold;
+    z-index: -1;
+    opacity: 0.89;
+    border: 2px solid black;
+    border-bottom-left-radius: 100px;
+} */
+
+#row1{
+   color: rgb(254, 254, 254);
+    font-weight:bold;
+    font-size: clamp(50px, 2vw, 180px);
+    font-family: "Lucida Handwriting", cursive;
+    text-align: center;
+    margin-top: 150px;
+    text-shadow: 0 0 10px black;
+    border-radius: 10px;
+    background-color: rgb(104 255 0);
+}
+
+
+/*Button Styling*/
+.btn{
+    margin-top:15px;
+    border: 3px solid white;
+    border-radius:15px;
+    background-color:yellow;
+    font-size:20px;
+    font-weight: bold;
+    font-family: 'Ubuntu Mono', monospace;
+}
+.btn:hover{
+    cursor: pointer;
+    background-color: red;
+}
+
+
+#container3{
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px; /* Space between images */
+    justify-items: center;
+}
+#row2{
+    width:24vw;
+    height:21vh;
+    box-shadow: 2px 7px 16px 19px;
+     margin-top:51px;
+     margin-bottom: 51px;
+     display: flex;
+    justify-content: center;
+     align-items: flex-end;
+     position: relative;
+     margin-right: 38px;
+     border-radius: 40px;
+}
+#row2::before{
+    content: '';
+    background: url('images/foods.jpg') no-repeat center center/cover;
+    position: absolute;
+    top: 0px;
+    left:0px;
+    width: 24vw;
+    height:21vh;
+    z-index: -1;
+    border-radius: 40px;
+}
+#row3{
+    position: relative;
+    width: 24vw;
+    height:21vh;
+    display: flex;
+    justify-content: center;
+     align-items: flex-end;
+     box-shadow: 2px 7px 16px 19px;
+     margin-top:51px;
+     margin-bottom: 51px;
+     
+     margin-left: 38px;
+     border-radius: 40px;
+}
+#row3::before{
+    content: '';
+    background: url('images/macaroons.jpg') no-repeat center center/cover;
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 24vw;
+    height:21vh;
+    z-index: -1;
+    border-radius: 40px;
+}
+
+#top3{
+    text-align: center;
+  
+    margin-top: 10px;
+    font-family:'Times New Roman', Times, serif;
+}
+#top4{
+    text-align: center;
+    color:red;
+    font-family: 'Ubuntu Mono', monospace;
+}
+#top5{
+    text-align: center;
+    color:red;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+
+
+  .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        padding: 50px;
+  }
+  
+  .image {
+    width: 100%;
+    overflow:visible;
+    border: #f4f4f4;
+    background-color: bisque;
+    background-size: 50%;
+    font-size: large;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+.add-to-order-button{
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+    background: #22d18e;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 15px;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+
+  }
+  .image img {
+    width: 180px;
+    height: 180px;
+    display: block;
+    font-weight: 100%;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  /*Designing the footer*/
+footer{
+    text-align: center;
+}
+/*Designing of Contact Us*/
+#ContactUs{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: gray;
+}
+.form-shape input, .form-shape select, .form-shape textarea{
+   width: 92%;
+   padding: 0.5rem;
+}
+/*Changing the color of placeholder*/
+::placeholder{                  
+    color:gray;
+}
+
+
+
+
+@media only screen and (max-width: 760px) {
+    
+#row1{
+
+     margin-top: 200px;
+ 
+}
+#navcontent{
+ 
+    gap: 10%;
+    margin-top: 15px;
+    }
+}

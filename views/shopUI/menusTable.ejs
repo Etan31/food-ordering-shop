@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu's Table</title>
+    <script src="https://kit.fontawesome.com/6926c4a9ef.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/menusTable.css">
+</head>
+
+<body>
+
+    <main class="main">
+
+        <%- include('sellerNavbar.ejs') %>
+
+            <div class="data-wrapper1">
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dish Name</th>
+                                <th>Unit</th>
+                                <th>price per unit</th>
+                                <th>image</th>
+                                <th>action</th>
+                                <th>status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+
+                            <% menus.forEach(item=> { %>
+                                <tr>
+                                    <td><%= item.name %></td>
+                                    <td><%= item.unit %></td>
+                                    <td><%= item.price %></td>
+                                    <td class="imageMenu">
+                                        <img src="/uploads/<%= item.image %>" alt="">
+                                    </td>
+                                    <td class="actionBtn">
+                                      
+                                        <button style="background-color: #63FF73;"
+                                            onclick="deleteItem('<%= item.menu_id %>')">Delete</button>
+                                    </td>
+                                    <td class="actionBtn"><button
+                                            style="background-color: #FF3939;">Unavailable</button> <button
+                                            style="background-color: #2ae93d;">Available</button></td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="addmenuBtn" onclick=" addMenuBtn()">
+                    <label for="">Add to menu</label>
+                    <i class="fa-solid fa-circle-plus"></i>
+                </div>
+
+            </div>
+            <form action="/menu/add" method="post" enctype="multipart/form-data">
+
+                <div class="data-wrapper2" style="display: none;">
+                    <div class="left">
+                        <div class="image-container">
+
+                            <img src="/images/macaroons.jpg" alt="">
+
+                            <div class="uploadBtn">
+                                <span class="upload-button"
+                                    onclick="document.getElementById('file-input').click();">Upload a file</span>
+                                <input type="file" id="file-input" hidden name="menuImage">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="right">
+
+                        <div class="sub-right">
+                            <label for="">Dish Name:</label>
+                            <input type="text" name="name">
+                        </div>
+                        <div class="sub-right">
+                            <label for="">Unit:</label>
+                            <input type="text" name="unit">
+                        </div>
+                        <div class="sub-right">
+                            <label for="">Price per Unit:</label>
+                            <input type="text" name="price">
+                        </div>
+
+
+                        <div class="button-wrapper">
+                            <button type="button" style="background-color: red;">Cancel</button>
+                            <button type="submit" style="background-color: rgb(5, 237, 5);">Save to Menu</button>
+                        </div>
+            </form>
+
+
+
+            </div>
+
+            </div>
+
+    </main>
+
+    <script>
+        function addMenuBtn() {
+            const mainTable = document.querySelector('.data-wrapper1')
+
+            const ordersData = document.querySelector('.data-wrapper2')
+
+            mainTable.style.display = "flex"
+            // backBtn.style.display = "none"
+            // backBtn2.style.display = "flex"
+            ordersData.style.display = "flex"
+        }
+
+
+        function deleteItem(id) {
+            fetch('/menu/delete', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id
+                })
+            }).then(
+
+                window.location.reload()
+
+            )
+        }
+    </script>
+</body>
+
+</html>

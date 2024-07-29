@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Dashboard -- Admin</title>
+   <script src="https://kit.fontawesome.com/6926c4a9ef.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="/css/sellerDashboard.css">
+</head>
+
+<body>
+
+   <main class="main">
+
+      <%- include('sellerNavbar.ejs') %>
+
+         <h1>Welcome to BufPay</h1>
+
+         <div id="options-container">
+            <div class="option" onclick="location.href='/shop/ordersTable'">
+               <label for="" style="color:#E45555; ">Orders</label>
+
+               <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div class="option" onclick="location.href='/shop/menusTable'">
+
+               <label for="" style="color:aqua; ">Menu</label>
+
+               <img src="/img/cutlery.png" alt="menu">
+
+
+               <!-- <a href="/shop/uploadmenu">
+               <button>Upload Menu</button>
+            </a> -->
+            </div>
+            <div class="option" onclick="location.href='/shop/shopTable'">
+               <label for="" style="color:#E45555; ">Shop</label>
+               <i class="fa-solid fa-house"></i>
+            </div>
+         </div>
+
+   </main>
+</body>
+
+</html>

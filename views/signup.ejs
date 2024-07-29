@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2? 
+	family=Ubuntu+Mono&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="/css/login.css">
+</header>
+
+<body style="background-image: url('/img/loginbackground.png');" >
+
+
+    <form action="/register-account" method="post">
+        <div class="container">
+            <img src="/img/logo.png" alt="">
+            <h1>Welcome to BufPay</h1>
+            <div>
+                <label for="user">
+                    Customer
+                </label>
+                <input id="user" type="radio" value="user" name="type">
+                <label for="seller">
+                    Seller
+                </label>
+                <input id="seller" type="radio" value="seller" name="type">
+
+            </div>
+            <label for="Fullname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" id="Fullname" required>
+            <label for="Address"><b>Address</b></label>
+            <input type="text" placeholder="Enter Address" name="address" id="Address" required>
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email" id="Email" required>
+            <label for="password"><b>Password</b></label>
+            <input type="text" placeholder="Enter Password" name="password" id="password" required>
+            <div class="form-link">
+                <p>Already have an account? <a href="/">Log in</a>.</p>
+                <!-- HTML -->
+            </div>
+            <button type="submit" class="loginBtn" value="Login" >Sign-up</button>
+        </div>
+    </form>
+
+ 
+
+    <script src="user.js"></script>
+   
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+
+@import url('/css/sellerMain.css');
+
+h1 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    font-size: clamp(18px, 2vw, 40px);
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 20px; /* Adjust the value as needed */
+}
+
+
+
+
+
+
+#options-container{
+    background-color: #F4E1DB;
+    height: 80%;
+    width: 80%;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    padding: 50px;
+    box-sizing: border-box;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+margin-left: auto;
+margin-right: auto;
+   
+}
+
+.option{
+    /* flex: 1; */
+    height: 90% !important;
+    width: 50% !important;
+    border-radius: 20px;
+    display: flex;
+    background-color: #F6F6F6;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for elevation effect */
+}
+.option:hover{
+    transform: scale(1.07);
+}
+.option label{
+    font-size: 30px;
+    font-weight: bold;
+   
+}
+.option img{
+    margin-top: 20px;
+    width: 100px;
+    height: 100px;
+}
+.option i{
+    margin-top: 20px;
+    font-size: 100px;
+    color: #E45555;
+}
