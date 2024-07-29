@@ -1,0 +1,355 @@
+*,*::after,*::before {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: inherit
+}
+
+html {
+    font-size: 62.5%
+}
+
+body {
+    font-family: "Lato",sans-serif;
+    font-weight: 400;
+    box-sizing: border-box;
+    display: flex;
+    height: auto;
+    min-height: 88vh;
+}
+
+.main {
+    position: relative;
+top: 5em;
+    width: 100%;
+    background-color: silver;
+    border: 1px solid silver;
+    transition: all .4s ease;
+    z-index: 2;
+  
+    flex-grow: 1; 
+}
+
+.main .nav-header {
+    position: fixed;
+
+    top: 0;
+    width: 100%;
+    border-bottom: .2rem solid #f1f1f1;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    height: 5rem;
+    background-color: #faebba;
+}
+
+.main .nav-header__left-details {
+    position: relative;
+
+    height: 100%;
+    display: flex;
+   
+  
+}
+
+
+.main .nav-header__left-details--icon {
+    margin-left: 1rem;
+    font-size: 3.0rem;
+    opacity: 5
+}
+
+.main .nav-header__right-details {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    border-radius: .5rem;
+    text-align: center;
+    width: 70%;
+    font-size: clamp(12px, 2vw, 16px);
+    color: #000;
+    padding: 0 1rem;
+    font-weight: bold;
+
+ 
+}
+
+.main .nav-header__right-details--updateinfo,.main .nav-header__right-details--logout {
+    text-decoration: none;
+    color: #333;
+    transition: transform .5s ease-in-out;
+
+padding: 10px 10px;
+flex: 1;
+border-radius: 20px;
+transition: .5s;
+}
+
+.main .nav-header__right-details--updateinfo:hover,.main .nav-header__right-details--logout:hover {
+    transform: translateY(-0.2rem) scale(1.1);
+    background: linear-gradient(45deg, #4f1919, #ff3333);
+    color: #f1f1f1;
+}
+
+.main .data-wrapper1 {
+    /* margin: 0 1rem 0 1rem; */
+
+    font-size: 1.5rem;
+    display: flex;
+    width: 100%;
+  box-shadow:#333;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    z-index: 6;
+
+}
+.modal, .modal1{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    height: 70%;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.modal1 {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    backdrop-filter: blur(5px); /* Apply a blur effect */
+}
+
+.orderForm{
+    border-radius: 10px;
+    position: fixed;
+    display: flex;
+  flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    min-width: 340px;
+    height: 80%;
+   top: 13%;
+   background-color: #ffffff;
+}
+
+.forReview{
+    border-radius: 10px;
+    position: fixed;
+    display: flex;
+  flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    min-width: 340px;
+    height: 50%;
+   top: 30%;
+   background-color: #ffffff;
+
+}
+.review{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+}
+h1{
+    margin-top: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(26px, 3vw, 70px);
+   
+}
+
+.horizontal-line {
+    border: none; /* Remove default border */
+    width: 70%;
+    border-top: 2px solid black; /* Specify the color and thickness of the line */
+    margin: 10px 0; margin-bottom: 30px;
+}
+.orderTable {
+    width:80%;
+    /* overflow-x: hidden; */
+    position: relative;
+    left: -1%;
+    height: fit-content;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.orderTable::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */}
+table {
+    border-collapse: collapse; /* Collapse table borders */
+    font-size: clamp(12px, 2vw, 40px);
+    font-family: 'Times New Roman', Times, serif;
+
+    width: 100%;
+}
+
+td, th {
+    padding: 10px; /* Adjust padding */
+    border: none; /* Remove borders from table cells */
+text-align: center;
+}
+
+
+.total{
+    font-weight: bold;
+    font-size: clamp(12px, 2vw, 40px);
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    left: 0;
+}
+.totals{
+    width: 55%;
+    position: relative;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-wrapper {
+    margin-top: 1%;
+    gap: 2rem;
+    display: flex;
+    flex-direction: row;
+    padding: 3% 0;
+    place-content: center;
+   
+}
+.proceedBtn{
+    color: rgb(0, 0, 0);
+    border: none; 
+    padding: 10px 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.deleteBtn{
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+}
+.deleteBtn:hover{
+    transform: scale(1.05);
+    color: red;
+}
+.forms{
+    position: relative;
+  
+ 
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formHead{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 0;
+    gap: 20%;
+width: 100%;
+margin-left: 10px;
+justify-content: center;
+}
+.formHead label{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(12px, 2vw, 20px);
+    font-weight: bold;
+}
+h2{
+    margin-bottom: 12px;
+    font-family: 'Times New Roman', Times, serif;
+    /* font-size: clamp(12px, 2vw, 20px); */
+   
+}
+.formtoFill{
+    margin-top: 10px;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    width: 90%;
+    font-size: clamp(12px, 2vw, 20px);
+   
+
+}
+.formlabel, .formInput{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.formlabel{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(12px, 2vw, 20px);
+    gap: 30px;
+}
+.formInput input{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+   background-color: rgb(208, 208, 208);
+}
+.uploadID{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+   gap: 20%;
+    font-size: 12px;
+
+}
+.quantity {
+    font-size: clamp(12px, 2vw, 20px);
+    text-align: center;
+    border: none;
+    width: 30%; /* Adjust the width as needed */
+    border-bottom: 1px solid black; /* Add a line at the bottom */
+}
+
+
+
+@media only screen and (max-width: 780px) {
+
+    .main {
+        left: 0;
+        width: 100%
+    }
+.uploadID{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+   gap: 20%;
+    font-size: 12px;
+ 
+}
+    .main .nav-header {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%
+    }
+
+  
+    .main .nav-header__left-details--icon {
+        opacity: 1;
+        
+    }
+
+    
+
+   
+}

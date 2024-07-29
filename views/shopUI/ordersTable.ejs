@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Order's Table</title>
+   <script src="https://kit.fontawesome.com/6926c4a9ef.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="/css/ordersTable.css">
+</head>
+<body>
+  
+   <main class="main">
+      
+      <%- include('sellerNavbar.ejs') %>
+
+
+      <div class="back"   id="back" onclick="location.href = '/dashboard_seller'">
+        <i class="fa-solid fa-circle-left"></i>
+    </div>
+
+      <div class="data-wrapper1" >
+       
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Number of items in order</th>
+                        <th>order total:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                    <% orders.forEach((order, index) => { %>
+                        <tr onclick="viewOrder(<%= JSON.stringify(order) %>)">
+                            <td><%= order.name %></td>
+                            <td><%= order.address %></td>
+                            <td><%= order.itemNum %></td>
+                            <td><%= order.total %></td>
+                    </tr>
+                    <% }) %>
+                    
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+
+      <div class="data-wrapper2" style="display: none;">
+       
+
+    <div class="top">
+        <div class="back" id="back2" style="margin-left: 90px;" >
+            <a href="/dashboard_seller"><i class="fa-solid fa-circle-left"></i></a>
+        </div>
+
+        <div class="tops">
+
+      
+            <div class="sub-top">
+                <label for="">Name:</label>
+                <input type="text" id="customer-name">
+            </div>
+            <div class="sub-top">
+                <label for="">Address:</label>
+                <input type="text" id="customer-add">
+            </div>
+            <div class="sub-top">
+                <label for="">Mode of Delivery:</label>
+                <input type="text" id="mode">
+            </div>
+
+        </div>
+    </div>
+
+    <div  class="middle">
+      
+        <div class="data-table" id="data-table2">
+            <table id="order-table">
+                <thead>
+                    <tr>
+                        <th>Foods</th>
+                        <th>Price</th>
+                        <th>quantity</th>
+                        <th>Set Time for order (minutes)</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+<div class="total">
+<label for="">Total:</label>
+<input type="text" value="P1400" readonly>
+</div>
+
+
+
+<div class= "button-wrapper">
+
+    <button style="background-color: #FF6464;">Cancel</button>
+    <button style="background-color: #63FF73;">Deliver</button>
+</div>
+
+
+
+
+      </div>
+
+   </main>
+
+   <script>
+    function viewOrder(order){
+        
+
+        console.log(order)
+        const mainTable = document.querySelector('.data-wrapper1')
+        const backBtn = document.getElementById('back')
+        const backBtn2 = document.getElementById('back2')
+        const ordersData = document.querySelector('.data-wrapper2')
+
+        document.getElementById("customer-name").value = order.name
+        document.getElementById("customer-add").value = order.address
+        document.getElementById("mode").value = order.mode
+
+        mainTable.style.display = "none"
+        backBtn.style.display = "none"
+        backBtn2.style.display = "flex"
+        ordersData.style.display = "flex"
+
+        const orderTable = document.getElementById("order-table")
+
+        order.orders.forEach(order => {
+        const row = document.createElement("tr")
+
+            const td = document.createElement("td")
+            td.innerText = order.name
+            row.appendChild(td)
+            const td1 = document.createElement("td")
+            td1.innerText = order.total_payment
+            row.appendChild(td1)
+            const td2 = document.createElement("td")
+
+            td2.innerText = order.quantity
+            row.appendChild(td2)
+
+            const td3 = document.createElement("td")
+            const minutes = document.createElement("input")
+            minutes.type = "text"
+            minutes.classList.add("inputMinutes")
+            td3.appendChild(minutes)
+            row.appendChild(td3)
+
+
+            const td4 = document.createElement("td")
+
+            const preparing = document.createElement("button")
+            const ready = document.createElement("button")
+
+            preparing.innerText = "Preparing"
+            preparing.style.backgroundColor = "#90D7FF"
+            ready.innerText = "Ready"
+            ready.style.backgroundColor = "#63FF73"
+            td4.className = "statusBtn"
+            td4.appendChild(preparing)
+            td4.appendChild(ready)
+            row.appendChild(td4)
+
+
+
+
+            orderTable.querySelector("tbody").appendChild(row)
+        });
+    }
+    
+
+
+   </script>
+</body>
+</html>

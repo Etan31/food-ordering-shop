@@ -1,0 +1,105 @@
+@import url('/css/sellerMain.css');
+
+
+
+.data-wrapper2{
+    width: 90%;
+    height: 90%;
+    margin-top: 20px;
+    display: flex;
+    position: absolute; /* or position: fixed; */
+    top: 50%;
+    background-color: #F4E1DB;
+    flex-direction: row;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+padding: 20px;
+}
+.left{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+
+.image-container{
+    width: 80%;
+ padding: 20px;
+    background-color: #F6F6F6;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.image-container img{
+    width: 280px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.upload-button{
+   
+font-size: 18px;
+background-color: #d9d9d9;
+border-radius: 10px;
+padding: 15px;
+font-weight: bold;
+}
+.uploadBtn{
+    margin-top: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.right{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.sub-right{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub-right label{
+    font-size: 16px;
+    font-weight: bold;
+}
+.sub-right input{
+    width:350px;
+    height: 20px;
+    margin-left: 20px;
+    border: none;
+}
+
+.button-wrapper{
+    display: flex;
+    justify-content: end;
+    width: 80%;
+    margin-top: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 20px;
+}
+.button-wrapper button{
+    padding: 10px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}

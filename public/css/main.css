@@ -1,0 +1,54 @@
+*,*::after,*::before {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: inherit
+}
+
+html {
+    font-size: 62.5%
+}
+
+body {
+    font-family: "Lato",sans-serif;
+    font-weight: 400;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  
+}
+
+.form-wrapper {
+    width: 90rem;
+    height: 40rem;
+    padding: 0 3rem;
+    border-radius: .5rem;
+    box-shadow: 0 0 2rem rgba(0,0,0,.3);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem
+}
+
+
+
+
+
+.main {
+    position: relative;
+    left: 5rem;
+    top: 5rem;
+    width: calc(100% - 5rem);
+    background-color: silver;
+    border: 1px solid silver;
+    transition: all .4s ease;
+    z-index: 2;
+    overflow-x: hidden;
+}
+
+
+
+.image-menu{
+    margin: 0 auto;
+}

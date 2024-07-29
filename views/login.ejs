@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>BufPay LogIn</title>
+   <link rel="stylesheet" href="/css/login.css">
+
+</head>
+
+<body  style="background-image: url('/img/loginbackground.png');" >
+   <div class="loginbackground">
+
+      <form action="/login" method="POST">
+         <div class="container" id="login-container" >
+            <img src="/img/logo.png" alt="">
+            <h1>Welcome to BufPay</h1>
+            <div class="input-div">
+               <label for="Fullname"><b>Username</b></label>
+               <input type="text" name="username" value="" placeholder="Enter your Username">
+               <label for="password"><b>Password</b></label>
+               <input type="password" name="password" placeholder="Enter your Password" value="">
+            </div>
+            <div class="form-link" style="margin: 20px 20px;">
+            <label for="" class="SignupBtn">Didn't have an Account? <a href="/user-portal/register">SignUp</a></label>
+         </div>
+         <button class="loginBtn" type="submit">Login</button>
+         </div>
+      </form>
+   </div>
+  
+
+</body>
+
+</html>

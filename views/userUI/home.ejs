@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" />
+  <script src="app.js" defer></script>
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="https://kit.fontawesome.com/6926c4a9ef.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://kit.fontawesome.com/6926c4a9ef.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/fontawesome.min.css" />
+  <title>HOME</title>
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <img src="/img/logo.png" alt="essu logo" class="logo-details__img">
+      <span class="logo-details__name">BufPay</span>
+    </div>
+    <ul class="nav-list">
+
+      <% shops.forEach(shop =>{ %>
+        <li class="nav-list__lists" onclick="getShopDishes('<%= shop.user_id %>')">
+          <a  class="page-main">
+            <!-- <i class="fa-solid fa-house page-main--icon"></i>   -->
+            <img src="/uploads/<%= shop.logo %>">
+            <span class="page-main--name"><%= shop.shopname %></span>
+         
+          <span class="nav-list__lists--tooltip"><%= shop.shopname %></span>
+        </li>
+      <% }) %>
+    
+    </ul>
+
+    <i class="bx bx-chevrons-right nav-list__lists--right-icon" id="chevrons-btn"></i>
+
+  </div>
+  <main class="main">
+
+    <!-- Include the sidebar -->
+    <%- include('navbar.ejs') %>
+    <div class="data-wrapper1">
+
+    
+        <h1>Welcome to Bufpay</h1>
+       
+
+      <div id="search-container">
+        <input type="text" id="search-box" placeholder="Search..." oninput="searchmenu()">
+      </div>
+
+      <div class="image-grid">
+        <% menus.forEach(menu => { %>
+          <div class="image">
+            <img src="/uploads/<%= menu.image %>" class="image-menu" alt="<%= menu.name %>">
+            <p><%= menu.name %></p>
+            <p>₱<%= menu.price %></p>
+            <button class="add-to-order-button" onclick="addToOrder('<%= menu.menu_id %>', '<%= menu.seller_id %>')">Add to Order</button>
+          </div>
+        <% }); %>
+      </div>
+
+    </div>
+
+  </main>
+  <script src="../js/app.js"></script>
+  <script src="../js/home.js"></script>
+  <script>
+    function getShopDishes(shop){
+      window.location.href = `/shop/getdishes?shop=${shop}`
+    }
+  </script>
+
+</body>
+
+</html>
