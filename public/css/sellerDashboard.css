@@ -1,6 +1,12 @@
 
 @import url('/css/sellerMain.css');
 
+:root {
+    --main-bg: #FBAB7E;
+    --primary: #d10000;
+    --background-bg: linear-gradient(62deg, #fbac7eb4 0%, #f7cf68d5 100%);
+}
+
 h1 {
     position: relative;
     display: flex;
@@ -16,8 +22,9 @@ h1 {
 
 
 #options-container{
-    background-color: #F4E1DB;
-    height: 80%;
+    /* background-color: var(--main-bg); */
+    background-image: var(--background-bg);
+    height: 65%;
     width: 80%;
     display: flex;
     margin-top: 20px;
@@ -31,6 +38,10 @@ h1 {
 margin-left: auto;
 margin-right: auto;
    
+}
+
+label {
+    color: #E45555 !important;
 }
 
 .option{
@@ -63,6 +74,9 @@ margin-right: auto;
    
 }
 .option img{
+    /* filter: invert(34%) sepia(91%) saturate(10040%) hue-rotate(320deg) brightness(95%) contrast(85%); */
+    filter: hue-rotate(194deg) saturate(10) brightness(251.9);
+    opacity: 0.75;
     margin-top: 20px;
     width: 100px;
     height: 100px;

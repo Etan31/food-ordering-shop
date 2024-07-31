@@ -1,11 +1,16 @@
 
 @import url('/css/sellerMain.css');
-
+:root {
+    --main-bg: #FBAB7E;
+    --primary: #d10000;
+    --background-bg: linear-gradient(62deg, #fbac7eb4 0%, #f7cf68d5 100%);
+}
 
 .data-wrapper1 {
     width: 90%;
     height: 60%;
-    background-color: #d9d9d9;
+    /* background-color: #d9d9d9; */
+    background-image: var(--background-bg);
     display: flex;
     position: absolute; /* or position: fixed; */
     top: 50%;
@@ -46,13 +51,13 @@
     padding: 10px;
 
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.37);
 }
 
 .data-table table td {
     padding-top: 30px;
     font-size: 18px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.37);
 }
 #data-table2 table td {
   
@@ -88,7 +93,6 @@ cursor: pointer;
     flex-direction: column;
     margin: auto;;
  }
-
  
 .sub-top{
     display: flex;
