@@ -152,6 +152,24 @@ router.post('/bufpay-user/addOrder', checkNotAuthenticated(), async (req, res) =
     }
 });
 
+router.delete('/bufpay-user/deleteAllOrders', checkNotAuthenticated(), async (req, res) => {
+  try {
+    const user_id = req.user.user_id;
+
+    // Construct the DELETE query to delete all orders for the specified user_id
+    const deleteQuery = 'DELETE FROM cart WHERE user_ids = $1';
+    
+    // Execute the query to delete all orders
+    await pool.query(deleteQuery, [user_id]);
+
+    res.status(200).send({ message: 'All orders deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting all orders:', error);
+    res.status(500).send({ error: 'Internal Server Error' });
+  }
+});
+
+
 
 router.put('/bufpay-user/updateQuantity', checkNotAuthenticated(), async (req, res) => {
     try {

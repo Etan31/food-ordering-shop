@@ -19,13 +19,40 @@ function cancelBtn() {
 function submitBtn() {
   const modal = document.getElementById('modal1')
   const modal2 = document.getElementById('modal2')
-  alert("order is successfully submitted")
+
+  if (document.querySelector('.orderForm').checkValidity()) {
+    // If valid, display the modal
+    document.getElementById('modal2').style.display = 'flex';
+    alert("order is successfully submitted")
+
+  } else {
+    // If not valid, you can optionally show an alert or handle it in another way
+    alert('Please fill out all required fields.');
+    return;
+  }
+
   modal2.style.display = "flex";
   modal.style.display = "none";
 }
 
-function ok(){
-  window.location.href = "/bufpay-home"
+function ok() {
+  fetch('/bufpay-user/deleteAllOrders', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      alert("Your order is now processing");
+      window.location.href = "/bufpay-home";
+    } else {
+      console.error('Deleting all orders failed');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {

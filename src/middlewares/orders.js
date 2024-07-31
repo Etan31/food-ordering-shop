@@ -26,7 +26,6 @@ const getOrders = async (req, res, next) => {
             existingorder.orders.push(order)
         }
         
-
     })
 
     res.locals.orders = indivOrders
