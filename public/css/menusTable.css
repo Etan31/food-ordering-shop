@@ -1,7 +1,9 @@
 @import url('/css/sellerMain.css');
 
 :root {
-    --gradient-bg: #FBAB7E; background-image: linear-gradient(90deg, #FBAB7E 0%, #F7CE68 100%);
+    --main-bg: #FBAB7E;
+    --primary: #d10000;
+    --background-bg: linear-gradient(62deg, #fbac7eb4 0%, #f7cf68d5 100%);
 }
 
 .data-wrapper1{
@@ -74,34 +76,24 @@
 .actionBtn button:hover, .uploadBtn:hover{
     transform: scale(1.05);
 }
-.addmenuBtn{
-display: flex;
-display: flex;
-justify-content: end;
-position: relative;
-top: 60%;
+.addmenuBtn {
     display: flex;
-justify-content: end;
-position: relative;
-top: 60%;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    top: 8px;
     font-size: 20px;
-    position:relative;
-    top:8px;
-font-weight: bold;
-font-weight: bold;
-gap: 10px;
     font-weight: bold;
-gap: 10px;
+    gap: 10px;
     cursor: pointer;
-    background-color: var(--gradient-bg);
+    background-color: var(--main-bg);
     width: 201px;
     align-self: flex-end;
     text-align: center;
-    align-items: center;
-    justify-content: space-around;
     padding-block: 8px;
     border-radius: 5px;
 }
+
 
 .addmenuBtn i{
     font-size: 30px;
