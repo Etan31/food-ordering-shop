@@ -84,12 +84,12 @@ cursor: pointer;
 
  .tops{
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-left: 180px;
-    margin-right: auto;
     width: 40%;
+    flex-direction: column;
+    margin: auto;;
  }
+
+ 
 .sub-top{
     display: flex;
     flex-direction: row;
@@ -118,14 +118,26 @@ cursor: pointer;
    margin-left: auto;
    margin-right: auto;
 }
+
 .inputMinutes{
-    width: 30%;
-    background-color: #d9d9d9;
+    width: 20%;
     height: 50px;
-    border-radius: 10px;
-    border: none;
-    text-align: center;
+    padding-left: 5px;
 }
+
+input.inputTime, 
+select.selectTime {
+    width: 80px;
+    margin-right :20px; 
+    height: 35px;
+    padding-left: 5px;
+}
+
+td.statusBtn {
+    display: flex;
+    justify-content: space-around;
+}
+
 .statusBtn button{
     padding: 20px;
     border-radius: 10px;
@@ -168,4 +180,19 @@ cursor: pointer;
     border-radius: 10px;
     border: none;
     cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+    td.statusBtn {
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+    }
+
+    .statusBtn button{
+        width: 100%;
+        padding-block: clamp(5px, 1vw, 20px);
+    }
 }

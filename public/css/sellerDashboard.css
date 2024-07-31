@@ -37,6 +37,7 @@ margin-right: auto;
     /* flex: 1; */
     height: 90% !important;
     width: 50% !important;
+    min-width: 180px;
     border-radius: 20px;
     display: flex;
     background-color: #F6F6F6;
@@ -45,6 +46,13 @@ margin-right: auto;
     align-items: center;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for elevation effect */
+}
+
+.option i,
+.option img {
+    font-size:  clamp(50px, 5vw, 100px) !important;
+    width: clamp(50px, 5vw, 100px) !important;
+    height:  clamp(50px, 5vw, 100px) !important;
 }
 .option:hover{
     transform: scale(1.07);
@@ -63,4 +71,13 @@ margin-right: auto;
     margin-top: 20px;
     font-size: 100px;
     color: #E45555;
+}
+
+@media (max-width: 800px) {
+    #options-container {
+        display: flex;
+        height: 85%;
+        flex-direction: column;
+        align-items: center;
+    }
 }
