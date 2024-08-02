@@ -123,7 +123,7 @@
             <div class="button-wrapper">
               <button class="proceedBtn" type="button" id="cancelButton">Cancel</button>
               <button class="proceedBtn" type="submit" onclick="submitBtn()"
-                style="background-color: #F9E2A7;">Submit</button>
+                style="background-color: #F9E2A7;">Confirm and Go to Payment</button>
 
             </div>
           </div>
@@ -134,46 +134,46 @@
 
       <div class="modal1" id="modal2" style="display: none;">
         <div class="forReview">
-          <h1>Total Payment:</h1>
+          <h1 class="totalPayment">Total Payment:</h1>
 
           <div class="review">
 
-            <div>
-              <div class="formInput" style="text-align: center;">
-                <div class="formlabel">
-                  <p>Order ID:</p>
-                  <input type="text" value="<%= orderID %>" readonly> <!-- orderID -->
-                </div>
-
-                <div class="formlabel">
-                  <p>Foods:</p>
-                  <ol>
-                    <% orders.forEach(foods => { %>
-                    <li><%= foods.name %> - <%= foods.quantity %> x <%= foods.price %> Pesos</li>
-                    <% }) %>
-                  </ol>
-                </div>
-
-                <div class="formlabel">
-                  <p>Delivery Fee:</p>
-                  <p><%= deliveryFee %> Pesos</p>
-                </div> <!-- Delivery Fee -->
-
-
-                <div class="formlabel">
-                  <p>Total:</p>
-                  <p><%= totalPrice + deliveryFee %> Pesos</p>
-                </div> <!-- Total including delivery fee -->
-
-                <div class="formlabel">
-                  <p>Gcash tracking number:</p>
-                  <input type="number" placeholder="Tracking number" />
-                </div>
+            <div class="orderPreview" style="text-align: center;">
+              <div class="wrapperReview">
+                <p>Order ID:</p>
+                <p> <%= orderID %></p> <!-- orderID -->
               </div>
 
-            </div>
+              <div class="wrapperReview foodWrapper" >
+                <p>Foods:</p>
+                <ul>
+                  <% orders.forEach(foods => { %>
+                  <li><%= foods.name %> - <%= foods.quantity %> x <%= foods.price %> Pesos</li>
+                  <% }) %>
+                </ol>
+              </div>
 
-          <button class="proceedBtn" id="okBtn" style="background-color: #F9E2A7;" onclick="ok()">OK</button>
+              <div class="wrapperReview">
+                <p>Delivery Fee:</p>
+                <p><%= deliveryFee %> Pesos</p>
+              </div> <!-- Delivery Fee -->
+
+
+              <div class="wrapperReview">
+                <p>Total:</p>
+                <p><%= totalPrice + deliveryFee %> Pesos</p>
+              </div> <!-- Total including delivery fee -->
+
+              <div class="wrapperReview inputNumTracker">
+                <p>Gcash tracking number:</p>
+                <input type="number" class="trakNumber" id="trakNum" placeholder="Tracking number" />
+              </div>
+
+              <button class="cancelBtn">Go back</button>
+              <button class="proceedBtn" id="okBtn" style="background-color: #F9E2A7;" onclick="ok()">Checkout</button>
+            </div>
+          </div>
+          
 
         </div>
 
