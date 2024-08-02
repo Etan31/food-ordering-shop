@@ -167,7 +167,7 @@ transition: .5s;
     position: absolute;
     left: 0;
     width: 100%;
-    height: 10px; /* Decrease the height of the triangles */
+    height: 10px;
     background-color: transparent;
     z-index: 1;
 }
