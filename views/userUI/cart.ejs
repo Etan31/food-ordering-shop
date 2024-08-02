@@ -137,22 +137,41 @@
           <h1>Total Payment:</h1>
 
           <div class="review">
-            <div class="formlabel">
-              <label for="orderID"> Order ID:</label>
-              <label for="deliveryDateTime">Foods:</label>
-              <label for="name">Delivery Fee:</label>
-              <label for="total" style="font-weight: bold;">Total:</label>
+
+            <div>
+              <div class="formInput" style="text-align: center;">
+                <div class="formlabel">
+                  <p>Order ID:</p>
+                  <input type="text" value="<%= orderID %>" readonly> <!-- orderID -->
+                </div>
+
+                <div class="formlabel">
+                  <p>Foods:</p>
+                  <ol>
+                    <% orders.forEach(foods => { %>
+                    <li><%= foods.name %> - <%= foods.quantity %> x <%= foods.price %> Pesos</li>
+                    <% }) %>
+                  </ol>
+                </div>
+
+                <div class="formlabel">
+                  <p>Delivery Fee:</p>
+                  <p><%= deliveryFee %> Pesos</p>
+                </div> <!-- Delivery Fee -->
+
+
+                <div class="formlabel">
+                  <p>Total:</p>
+                  <p><%= totalPrice + deliveryFee %> Pesos</p>
+                </div> <!-- Total including delivery fee -->
+
+                <div class="formlabel">
+                  <p>Gcash tracking number:</p>
+                  <input type="number" placeholder="Tracking number" />
+                </div>
+              </div>
+
             </div>
-
-            <div class="formInput" style="text-align: center;">
-              <input type="text" value="000123">
-              <input type="text" value="568 pesos">
-              <input type="text" value="50 pesos">
-              <input type="text" value="618 pesos">
-
-            </div>
-
-          </div>
 
           <button class="proceedBtn" id="okBtn" style="background-color: #F9E2A7;" onclick="ok()">OK</button>
 

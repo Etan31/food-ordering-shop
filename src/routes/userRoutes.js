@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { pool } = require("../../dbConfig");
 const { checkNotAuthenticated } = require('../middlewares/authCheckNotAuthenticate.js');
 const {getUserOrders} = require('../middlewares/orders.js')
+const generateOrderId = require('../middlewares/orderID_generator');
 
 
 router.get('/user-portal/register', (req, res) => {
@@ -58,37 +59,46 @@ router.get('/shop/getdishes', checkNotAuthenticated() , async(req, res) => {
      }
 })
 
-router.get('/bufpay-user/cart', checkNotAuthenticated(), async (req, res) => {
-     const user_id = req.user.user_id;
- 
-     console.log("user", user_id);
-     const query = `
-         SELECT cart.*, menus.* 
-         FROM cart 
-         LEFT JOIN menus ON cart.food_id = menus.menu_id
-         WHERE user_ids = $1
-     `;
- 
-     const values = [user_id];
- 
-     try {
-         const result = await pool.query(query, values);
- 
-         // Calculate total price
-         let totalPrice = 0;
-         result.rows.forEach(order => {
-             totalPrice += parseFloat(order.price);
-         });
- 
-         // Render the template after calculating the total price
-         res.render("userUI/cart.ejs", { orders: result.rows, totalPrice: totalPrice });
- 
-        
-     } catch (error) {
-         console.error('Error:', error);
-         res.status(500).send('Error occurred while retrieving order data.');
-     }
- });
+router.get('/bufpay-user/cart', checkNotAuthenticated(), generateOrderId, async (req, res) => {
+  const user_id = req.user.user_id;
+
+  console.log("user", user_id);
+  const query = `
+      SELECT cart.*, menus.* 
+      FROM cart 
+      LEFT JOIN menus ON cart.food_id = menus.menu_id
+      WHERE user_ids = $1
+  `;
+
+  const values = [user_id];
+
+  try {
+      const result = await pool.query(query, values);
+
+      // Calculate total price and delivery fee
+      let totalPrice = 0;
+      result.rows.forEach(order => {
+          totalPrice += parseFloat(order.price);
+      });
+
+      const deliveryFee = 50; //TODO: change this later
+
+      // Use the generated order ID
+      const orderID = req.orderId;
+
+      // Render the template after calculating the total price
+      res.render("userUI/cart.ejs", { 
+          orders: result.rows, 
+          totalPrice: totalPrice, 
+          deliveryFee: deliveryFee,
+          orderID: orderID
+      });
+
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).send('Error occurred while retrieving order data.');
+  }
+});
 
  router.get('/bufpay-user/order', checkNotAuthenticated(), getUserOrders, async (req, res) => {
     
