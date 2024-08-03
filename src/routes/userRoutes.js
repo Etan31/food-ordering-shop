@@ -1,10 +1,18 @@
 const router = require('express').Router();
 const { pool } = require("../../dbConfig");
+const { v4: uuidv4 } = require('uuid');
 const { checkNotAuthenticated } = require('../middlewares/authCheckNotAuthenticate.js');
 const {getUserOrders} = require('../middlewares/orders.js')
-const generateOrderId = require('../middlewares/orderID_generator');
+const  generateOrderId = require('../middlewares/orderID_generator');
 
 
+
+
+// Middleware function to generate a unique order ID
+// function generateOrderId(req, res, next) {
+//   req.orderId = uuidv4(); 
+//   next();
+// }
 router.get('/user-portal/register', (req, res) => {
     res.render('signup.ejs');
 });
@@ -199,46 +207,36 @@ router.put('/bufpay-user/updateQuantity', checkNotAuthenticated(), async (req, r
 
 
 
-router.post('/save-order', checkNotAuthenticated(), async(req, res) => {
-    try {
-        const {  mode,
-        name,
-        contactNumber,
-        deliveryAddress,
-        date_time} = req.body;
-        const user_id = req.user.user_id;
+router.post('/save-order', checkNotAuthenticated(), generateOrderId, async (req, res) => {
+  try {
+    const { mode, name, contactNumber, deliveryAddress, date_time } = req.body;
+    const orderID = req.orderId;
+    const user_id = req.user.user_id;
 
-        console.log("user:" , user_id)
-        
+    console.log("orderID:", orderID);
+    console.log("user:", user_id);
 
-        const getCart = `SELECT cart.*, menus.price
-                        FROM cart 
-                        LEFT JOIN menus ON cart.food_id = menus.menu_id
-                        WHERE cart.user_ids = $1`
-        const query = `INSERT INTO orders (food_id, user_id, mode_delivery, total_payment, delivery_pickup_date, seller_id, cust_name, contact, address, quantity) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`
-        const values = [ mode,
-            name,
-            contactNumber,
-            deliveryAddress,
-            date_time]
+    const getCart = `SELECT cart.*, menus.price
+                     FROM cart 
+                     LEFT JOIN menus ON cart.food_id = menus.menu_id
+                     WHERE cart.user_ids = $1`;
+    const query = `INSERT INTO orders (order_id, food_id, user_id, mode_delivery, total_payment, delivery_pickup_date, seller_id, cust_name, contact, address, quantity) 
+                   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`;
 
+    const { rows: cart } = await pool.query(getCart, [user_id]);
 
-    
-            const {rows: cart} = await pool.query(getCart, [user_id])
+    console.log("cart: ", cart);
 
-            console.log("cart: ", cart)
-
-            cart.forEach(async item => {
-
-                await pool.query(query, [item.food_id, user_id, mode, item.quantity* item.price, date_time, item.seller_id, name, contactNumber, deliveryAddress, item.quantity])
-
-            })
-
-    } catch (error) {
-        throw error;
+    for (const item of cart) {
+      await pool.query(query, [orderID, item.food_id, user_id, mode, item.quantity * item.price, date_time, item.seller_id, name, contactNumber, deliveryAddress, item.quantity]);
     }
-}) 
 
+    res.status(200).send({ success: true, message: 'Order saved successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ success: false, message: 'An error occurred while saving the order' });
+  }
+});
 
 
 

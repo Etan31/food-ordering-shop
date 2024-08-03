@@ -16,44 +16,82 @@ function cancelBtn() {
   modal.style.display = "none";
 }
 
-function submitBtn() {
-  const modal = document.getElementById('modal1')
-  const modal2 = document.getElementById('modal2')
 
-  if (document.querySelector('.orderForm').checkValidity()) {
-    // If valid, display the modal
-    document.getElementById('modal2').style.display = 'flex';
-    alert("order is successfully submitted")
+ function submitBtn() {
+    const modal = document.getElementById('modal1');
+    const modal2 = document.getElementById('modal2');
 
-  } else {
-    // If not valid, you can optionally show an alert or handle it in another way
-    alert('Please fill out all required fields.');
-    return;
+    if (document.querySelector('.orderForm').checkValidity()) {
+      // If valid, display the second modal
+      modal2.style.display = 'flex';
+      modal.style.display = 'none';
+    } else {
+      // If not valid, you can optionally show an alert or handle it in another way
+      alert('Please fill out all required fields.');
+      return;
+    }
   }
 
-  modal2.style.display = "flex";
-  modal.style.display = "none";
-}
+  // Attach event listener to the confirm button
+  document.getElementById('confirmButton').addEventListener('click', submitBtn);
 
-function ok() {
-  fetch('/bufpay-user/deleteAllOrders', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      alert("Your order is now processing");
-      window.location.href = "/bufpay-home";
-    } else {
-      console.error('Deleting all orders failed');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
+  // Function to handle form submission and delete orders
+  function ok() {
+    const form = document.getElementById('orderForm');
+    const formData = new FormData(form);
+
+    fetch('/save-order', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        return fetch('/bufpay-user/deleteAllOrders', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      } else {
+        throw new Error('Order submission failed');
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Your order is now processing");
+        window.location.href = "/bufpay-home";
+      } else {
+        console.error('Deleting all orders failed');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
+  // Attach event listener to the ok button
+  document.getElementById('okBtn').addEventListener('click', ok);
+
+  // Attach event listener to the go back button to return to the first modal
+  document.getElementById('goBackButton').addEventListener('click', () => {
+    document.getElementById('modal2').style.display = 'none';
+    document.getElementById('modal1').style.display = 'flex';
   });
-}
+
+  // Attach event listener to the cancel button to hide the first modal
+  document.getElementById('cancelButton').addEventListener('click', () => {
+    document.getElementById('modal1').style.display = 'none';
+  });
+
+
+
+
+
+
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
   const deliveryCheckbox = document.getElementById('deliveryCheckbox');
