@@ -39,6 +39,8 @@ function cancelBtn() {
   function ok() {
     const form = document.getElementById('orderForm');
     const formData = new FormData(form);
+    const trakNum = document.getElementById('trakNum').value;
+    formData.append('transaction_num', trakNum);
 
     fetch('/save-order', {
       method: 'POST',
@@ -69,7 +71,6 @@ function cancelBtn() {
     });
   }
 
-  // Attach event listener to the ok button
   document.getElementById('okBtn').addEventListener('click', ok);
 
   // Attach event listener to the go back button to return to the first modal
