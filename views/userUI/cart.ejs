@@ -126,10 +126,10 @@
 
     <div class="review">
       <div class="orderPreview" style="text-align: center;">
-        <div class="wrapperReview">
+        <!-- <div class="wrapperReview">
           <p>Order ID:</p>
-          <p><%= orderID %></p> <!-- orderID -->
-        </div>
+          <p><%= orderID %></p> 
+        </div> -->
 
         <div class="wrapperReview foodWrapper">
           <p>Foods:</p>
@@ -152,11 +152,11 @@
 
         <div class="wrapperReview inputNumTracker">
           <p>Gcash tracking number:</p>
-          <input type="number" class="trakNumber" id="trakNum" placeholder="Tracking number" />
+          <input type="number" class="trakNumber" id="trakNum" placeholder="Tracking number" required />
         </div>
 
         <button class="cancelBtn" id="goBackButton">Go back</button>
-        <button class="proceedBtn" id="okBtn" style="background-color: #F9E2A7;">Checkout</button>
+        <button class="proceedBtn checkout" id="okBtn" style="background-color: #F9E2A7;">Checkout</button>
       </div>
     </div>
   </div>

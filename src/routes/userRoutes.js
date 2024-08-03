@@ -88,14 +88,13 @@ router.get('/bufpay-user/cart', checkNotAuthenticated(), generateOrderId, async 
       const deliveryFee = 50; //TODO: change this later
 
       // Use the generated order ID
-      const orderID = req.orderId;
+      // const orderID = req.orderId;
 
       // Render the template after calculating the total price
       res.render("userUI/cart.ejs", { 
           orders: result.rows, 
           totalPrice: totalPrice, 
-          deliveryFee: deliveryFee,
-          orderID: orderID
+          deliveryFee: deliveryFee
       });
 
   } catch (error) {

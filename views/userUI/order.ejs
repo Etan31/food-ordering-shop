@@ -27,17 +27,16 @@
 
     <div class="data-wrapper1">
 
-      <div class="modal">
+      <div class="modal orderModal">
 
-        <h1>My Order</h1>
+        
     
 
         <div class="orderTable">
+          <h1 class="h1-order">My Order</h1>
           <table>
            
             <tbody>
-         
-     
               <% 
               let totalSum = 0;
               user_orders.forEach(order => {
@@ -45,12 +44,13 @@
               });
             %>
             <table>
-              <thead>
+              <thead class="thead-order">
                 <tr>
                   <th>Name</th>
                   <th>Total Payment</th>
                   <th>Shop Name</th>
                   <th>Mode of Delivery</th>
+                  <th>Transaction Number</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -61,12 +61,13 @@
                     <td><%= order.total_payment %></td>
                     <td><%= order.shopname %></td>
                     <td><%= order.mode_delivery %></td>
+                    <td><%= order.transaction_num %></td>
                     <td><%= order.status %></td>
                   </tr>
                 <% }) %>
-                <tr>
+                <tr class="total-payment-row">
                   <td colspan="4"><strong>Total Payment</strong></td>
-                  <td><%= totalSum %></td>
+                  <td style="font-weight: bold"><%= totalSum %></td>
                 </tr>
               </tbody>
             </table>

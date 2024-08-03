@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     outline: none;
-    box-sizing: inherit
+    box-sizing: border-box
 }
 
 html {
@@ -179,14 +179,14 @@ h1{
     margin: 10px 0; margin-bottom: 30px;
 }
 .orderTable {
-    width:80%;
+    width: 90%;
     /* overflow-x: hidden; */
     position: relative;
-    left: -1%;
-    height: fit-content;
-    margin-top: 40px;
+    height: 90vh;
+    /* margin-top: 15px; */
     margin-bottom: 30px;
 }
+
 .orderTable::-webkit-scrollbar {
     display: none; /* Hide the scrollbar */}
 table {
@@ -322,7 +322,32 @@ h2{
     border-bottom: 1px solid black; /* Add a line at the bottom */
 }
 
+.total-payment-row {
+  border-top: 1px solid #00000056;
+  padding-top: 10px;
+}
 
+
+.orderModal {
+    height: 87vh;
+    overflow-y: auto;
+    position: relative;
+    /* padding-top: 80px; */
+}
+
+.h1-order {
+    text-align: center;
+    padding-block:10px;
+}
+
+
+.thead-order {
+    position: sticky;
+    top: 2px;
+    border-bottom: 2px solid black;
+    z-index: 2;
+    background-color: white;
+}
 
 @media only screen and (max-width: 780px) {
 
@@ -330,14 +355,15 @@ h2{
         left: 0;
         width: 100%
     }
-.uploadID{
-    width: 100%;
-    margin-bottom: 20px;
-    display: flex;
-   gap: 20%;
-    font-size: 12px;
- 
-}
+    
+    .uploadID{
+        width: 100%;
+        margin-bottom: 20px;
+        display: flex;
+        gap: 20%;
+        font-size: 12px;
+    
+    }
     .main .nav-header {
         position: fixed;
         left: 0;

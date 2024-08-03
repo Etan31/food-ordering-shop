@@ -5,6 +5,12 @@
     box-sizing: inherit
 }
 
+:root {
+    --main-bg: #FBAB7E;
+    --primary: #d10000;
+    --background-bg: linear-gradient(62deg, #fbac7eb4 0%, #f7cf68d5 100%);
+}
+
 html {
     font-size: 62.5%
 }
@@ -208,6 +214,7 @@ transition: .5s;
     width: 100%;
 }
 
+
 .wrapperReview {
     display: flex;
     gap: 29px;
@@ -290,7 +297,22 @@ text-align: center;
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
+    margin: auto;
 }
+
+.proceedBtn.checkout:hover {
+    transform: scale(1.1);
+}
+
+button#goBackButton {
+    margin: auto;
+    background-color: transparent;
+    border: 1px solid var(--primary);
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .deleteBtn{
     color: rgb(0, 0, 0);
     border: none;
