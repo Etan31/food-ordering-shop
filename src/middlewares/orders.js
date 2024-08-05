@@ -29,7 +29,7 @@ const getOrders = async (req, res, next) => {
     })
 
     res.locals.orders = indivOrders
-    console.log(indivOrders, customers)
+    // console.log("orders.js:", indivOrders, customers)
     next()
     } catch (error) {
         throw error
