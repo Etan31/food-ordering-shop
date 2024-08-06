@@ -60,18 +60,15 @@
       
             <div class="sub-top">
                 <label for="">Name:</label>
-                <input type="text" id="customer-name">
+                <input type="text" id="customer-name" disabled>
             </div>
             <div class="sub-top">
                 <label for="">Address:</label>
-                <input type="text" id="customer-add">
+                <input type="text" id="customer-add" disabled>
             </div>
             <div class="sub-top">
-                <label for="deliveryMode">Mode of Delivery:</label>
-                <select name="deliveryMode" id="deliveryMode">
-                    <option value="doorToDoor">Door to Door</option>
-                    <option value="pickUp">Pick-up</option>
-                </select>
+                <label for="">Mode of Delivery:</label>
+                <input type="text" id="mode" disabled>
             </div>
 
         </div>
@@ -119,84 +116,144 @@
    </main>
     <script>
         function viewOrder(order) {
-            console.log(order);
-            
-            const mainTable = document.querySelector('.data-wrapper1');
-            const backBtn = document.getElementById('back');
-            const backBtn2 = document.getElementById('back2');
-            const ordersData = document.querySelector('.data-wrapper2');
-            
-            document.getElementById("customer-name").value = order.name;
-            document.getElementById("customer-add").value = order.address;
-            document.getElementById("mode").value = order.mode;
-            
-            mainTable.style.display = "none";
-            backBtn.style.display = "none";
-            backBtn2.style.display = "flex";
-            ordersData.style.display = "flex";
-            
-            const orderTable = document.getElementById("order-table");
-            
-            order.orders.forEach(order => {
-                const row = document.createElement("tr");
-                
-                const td = document.createElement("td");
-                td.innerText = order.name;
-                row.appendChild(td);
-                
-                const td1 = document.createElement("td");
-                td1.innerText = order.total_payment;
-                row.appendChild(td1);
-                
-                const td2 = document.createElement("td");
-                td2.innerText = order.quantity;
-                row.appendChild(td2);
-                
-                const td3 = document.createElement("td");
-                
-                const timeInput = document.createElement("input");
-                timeInput.type = "number";
-                timeInput.classList.add("inputTime");
-                
-                const timeTypeSelect = document.createElement("select");
-                timeTypeSelect.classList.add("selectTime");
-                
-                const optionHour = document.createElement("option");
-                optionHour.value = "hour";
-                optionHour.innerText = "Hour";
-                
-                const optionMinutes = document.createElement("option");
-                optionMinutes.value = "minutes";
-                optionMinutes.innerText = "Minutes";
-                
-                timeTypeSelect.appendChild(optionHour);
-                timeTypeSelect.appendChild(optionMinutes);
-                
-                td3.appendChild(timeInput);
-                td3.appendChild(timeTypeSelect);
-                
-                row.appendChild(td3);
-                
-                const td4 = document.createElement("td");
-                
-                const preparing = document.createElement("button");
-                preparing.innerText = "Preparing";
-                preparing.style.backgroundColor = "#90D7FF";
-                
-                const ready = document.createElement("button");
-                ready.innerText = "Ready";
-                ready.style.backgroundColor = "#63FF73";
-                
-                td4.className = "statusBtn";
-                td4.appendChild(preparing);
-                td4.appendChild(ready);
-                
-                row.appendChild(td4);
-                
-                orderTable.querySelector("tbody").appendChild(row);
-            });
+        console.log(order);
+
+        const mainTable = document.querySelector('.data-wrapper1');
+        const backBtn = document.getElementById('back');
+        const backBtn2 = document.getElementById('back2');
+        const ordersData = document.querySelector('.data-wrapper2');
+
+        document.getElementById("customer-name").value = order.name;
+        document.getElementById("customer-add").value = order.address;
+        document.getElementById("mode").value = order.mode;
+
+        mainTable.style.display = "none";
+        backBtn.style.display = "none";
+        backBtn2.style.display = "flex";
+        ordersData.style.display = "flex";
+
+        const orderTable = document.getElementById("order-table");
+
+        order.orders.forEach(order => {
+        const row = document.createElement("tr");
+
+        const td = document.createElement("td");
+        td.innerText = order.name;
+        row.appendChild(td);
+
+        const td1 = document.createElement("td");
+        td1.innerText = order.total_payment;
+        row.appendChild(td1);
+
+        const td2 = document.createElement("td");
+        td2.innerText = order.quantity;
+        row.appendChild(td2);
+
+        const td3 = document.createElement("td");
+
+        const timeInput = document.createElement("input");
+        timeInput.type = "number";
+        timeInput.classList.add("inputTime");
+
+        const timeTypeSelect = document.createElement("select");
+        timeTypeSelect.classList.add("selectTime");
+        timeTypeSelect.required = true;
+
+        const optionBlank = document.createElement("option");
+        optionBlank.value = "";
+        optionBlank.innerText = "Select time"; 
+        optionBlank.disabled = true; 
+        optionBlank.selected = true; 
+
+        const optionHour = document.createElement("option");
+        optionHour.value = "hour";
+        optionHour.innerText = "Hour";
+
+        const optionMinutes = document.createElement("option");
+        optionMinutes.value = "minute";
+        optionMinutes.innerText = "Minute";
+
+        timeTypeSelect.appendChild(optionBlank);
+        timeTypeSelect.appendChild(optionHour);
+        timeTypeSelect.appendChild(optionMinutes);
+
+        td3.appendChild(timeInput);
+        td3.appendChild(timeTypeSelect);
+
+        row.appendChild(td3);
+
+        const td4 = document.createElement("td");
+
+        const preparing = document.createElement("button");
+        preparing.innerText = "Preparing";
+        preparing.style.backgroundColor = "#90D7FF";
+        preparing.dataset.orderId = order.order_id;
+        preparing.dataset.foodId = order.food_id;
+
+        preparing.addEventListener("click", handlePreparingClick);
+        
+
+
+        const ready = document.createElement("button");
+        ready.innerText = "Ready";
+        ready.style.backgroundColor = "#63FF73";
+
+        td4.className = "statusBtn";;
+        td4.appendChild(preparing);
+        td4.appendChild(ready);
+
+        row.appendChild(td4);
+
+        orderTable.querySelector("tbody").appendChild(row);
+        });
+        
+    }
+    
+    function handlePreparingClick(event) {
+        const button = event.target;
+        const orderId = button.dataset.orderId;
+        const foodId = button.dataset.foodId;
+
+        const row = button.closest('tr');
+        const timeInput = row.querySelector('.inputTime');
+        const timeTypeSelect = row.querySelector('.selectTime');
+
+        const timeValue = timeInput.value;
+        const timeTypeValue = timeTypeSelect.value;
+
+        if (!timeValue || !timeTypeValue) {
+            alert('Please input the value of Order Time.');
+            return;
         }
-    </script>
+
+        const statusValue = `${timeValue} ${timeTypeValue}`;
+
+        fetch('/updateOrderStatus', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                orderId: orderId,
+                foodId: foodId,
+                status: statusValue
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Order status updated successfully.');
+            } else {
+                alert('Failed to update order status.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error updating order status.');
+        });
+    }
+
+</script>
 
 </body>
 </html>

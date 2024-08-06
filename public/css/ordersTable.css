@@ -51,7 +51,7 @@ tr:hover {
     max-width: 100%; /* Ensures it doesn't overflow */
     display: flex;
     flex-direction: column;
-
+    overflow-x: auto;
 }
 
 
@@ -206,6 +206,16 @@ td.statusBtn {
     width: 150px;
     border-radius: 10px;
     border: none;
+    cursor: pointer;
+}
+
+select#mode {
+    width: 50%;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 

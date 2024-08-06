@@ -16,12 +16,15 @@ const { pool } = require("./dbConfig");
 const { formatDate } = require("./src/modules/date.js")
 const initializePassport = require("./passportConfig");
 const generateUserNum = require('./src/modules/user_idgenerator');
+const cors = require('cors');
+
 
 initializePassport(passport);
 
 // Middlewares
 const { checkNotAuthenticated } = require('./src/middlewares/authCheckNotAuthenticate');
 const generateMenuId = require('./src/middlewares/menuID_generator');
+app.use(cors());
 app.use(generateMenuId);
 app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
@@ -160,5 +163,6 @@ app.post('/menu-upload', upload.single('menuImage'), checkNotAuthenticated() , a
 });
 
 
-const PORT = 80;
+
+const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

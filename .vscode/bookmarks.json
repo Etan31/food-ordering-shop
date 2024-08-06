@@ -1,0 +1,34 @@
+{
+	"files": [
+		{
+			"path": "src/routes/shopRoutes.js",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 55,
+					"label": "import-orders"
+				}
+			]
+		},
+		{
+			"path": "src/middlewares/orders.js",
+			"bookmarks": [
+				{
+					"line": 5,
+					"column": 45,
+					"label": "getOrder-shop"
+				}
+			]
+		},
+		{
+			"path": "views/shopUI/ordersTable.ejs",
+			"bookmarks": [
+				{
+					"line": 89,
+					"column": 23,
+					"label": "shop-orders table"
+				}
+			]
+		}
+	]
+}

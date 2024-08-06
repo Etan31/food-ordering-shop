@@ -7,6 +7,8 @@ const fs = require('fs');
 const path = require('path');
 const multer  = require('multer');
 
+// router.use(express.json());
+
 const storage = multer.diskStorage({
      destination: function (req, file, cb) {
        const uploadDirectory = 'public/uploads/';
@@ -107,4 +109,28 @@ router.delete('/menu/delete', checkNotAuthenticated(), async(req, res) => {
           throw error
      }
 })
+
+router.post('/updateOrderStatus', checkNotAuthenticated(), async (req, res) => {
+    const { orderId, foodId, status } = req.body;
+    console.log("Body: ", req.body);  // Check if this line logs
+
+    try {
+        const query = `
+            UPDATE orders
+            SET status = $1
+            WHERE order_id = $2 AND food_id = $3
+        `;
+        const values = [status, orderId, foodId];
+        const result = await pool.query(query, values);
+
+        if (result.rowCount > 0) {
+            res.json({ success: true });
+        } else {
+            res.json({ success: false });
+        }
+    } catch (error) {
+        console.error('Error updating order status:', error);
+        res.status(500).json({ success: false });
+    }
+});
 module.exports = router;
