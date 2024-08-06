@@ -103,8 +103,7 @@
 
 
 <div class= "button-wrapper">
-
-    <button style="background-color: #FF6464;">Cancel</button>
+    <!-- <button style="background-color: #FF6464;">Cancel</button> -->
     <button style="background-color: #63FF73;">Deliver</button>
 </div>
 
@@ -184,6 +183,7 @@
 
         const td4 = document.createElement("td");
 
+        // Button for setting the order as Prepairing
         const preparing = document.createElement("button");
         preparing.innerText = "Preparing";
         preparing.style.backgroundColor = "#90D7FF";
@@ -193,10 +193,14 @@
         preparing.addEventListener("click", handlePreparingClick);
         
 
-
+        // Button for setting the order as "Ready"
         const ready = document.createElement("button");
         ready.innerText = "Ready";
         ready.style.backgroundColor = "#63FF73";
+        ready.dataset.orderId = order.order_id;
+        ready.dataset.foodId = order.food_id;
+
+        ready.addEventListener("click", hadleReadyClick);
 
         td4.className = "statusBtn";;
         td4.appendChild(preparing);
@@ -208,7 +212,7 @@
         });
         
     }
-    
+
     function handlePreparingClick(event) {
         const button = event.target;
         const orderId = button.dataset.orderId;
@@ -228,7 +232,7 @@
 
         const statusValue = `${timeValue} ${timeTypeValue}`;
 
-        fetch('/updateOrderStatus', {
+        fetch('/shop/updateOrderStatus', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -252,6 +256,38 @@
             alert('Error updating order status.');
         });
     }
+
+function hadleReadyClick(event) {
+    const button = event.target;
+    const orderId = button.dataset.orderId;
+    const foodId = button.dataset.foodId;
+
+    //  alert(`Order ID: ${orderId}, Food ID: ${foodId}`);
+
+    fetch('/shop/updateOrderStatusActive', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            orderId: orderId,
+            foodId: foodId,
+            status: "Ready"
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Order status updated successfully.');
+        } else {
+            alert('Failed to update order status.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error updating order status.');
+    });
+}
 
 </script>
 

@@ -110,9 +110,34 @@ router.delete('/menu/delete', checkNotAuthenticated(), async(req, res) => {
      }
 })
 
-router.post('/updateOrderStatus', checkNotAuthenticated(), async (req, res) => {
+router.post('/shop/updateOrderStatus', checkNotAuthenticated(), async (req, res) => {
     const { orderId, foodId, status } = req.body;
     console.log("Body: ", req.body);  // Check if this line logs
+
+    try {
+        const query = `
+            UPDATE orders
+            SET status = $1
+            WHERE order_id = $2 AND food_id = $3
+        `;
+        const values = [status, orderId, foodId];
+        const result = await pool.query(query, values);
+
+        if (result.rowCount > 0) {
+            res.json({ success: true });
+        } else {
+            res.json({ success: false });
+        }
+    } catch (error) {
+        console.error('Error updating order status:', error);
+        res.status(500).json({ success: false });
+    }
+});
+
+
+router.post('/shop/updateOrderStatusActive', checkNotAuthenticated(), async (req, res) => {
+    const { orderId, foodId, status } = req.body;
+    console.log("Bodyactive: ", req.body);  // Check if this line logs
 
     try {
         const query = `
