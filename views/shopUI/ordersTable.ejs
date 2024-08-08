@@ -222,6 +222,7 @@ function viewOrder(order) {
     });
 }
 
+// for  setting the order as prepaing with Time
    function handlePreparingClick(event) {
         const button = event.target;
         const orderId = button.dataset.orderId;
@@ -266,6 +267,7 @@ function viewOrder(order) {
         });
     }
 
+    // for setting the order as ready
 function hadleReadyClick(event) {
     const button = event.target;
     const orderId = button.dataset.orderId;
@@ -304,18 +306,12 @@ function hadleReadyClick(event) {
 
             if (readyDeliverCell) {
                 readyDeliverCell.innerText = '✓'; // Add checkmark
-                readyDeliverCell.style.color = 'green'; // Optional: make it green
+                readyDeliverCell.style.color = 'green'; 
             }
 
             // Clear the input fields
             timeInput.value = '';
             timeTypeSelect.selectedIndex = 0;
-
-            // Also update the status cell if necessary
-            // Example:
-            // const statusCell = row.querySelector('.status-cell');
-            // statusCell.innerText = 'Ready';
-
         } else {
             alert('Failed to update order status.');
         }
@@ -325,54 +321,6 @@ function hadleReadyClick(event) {
         alert('Error updating order status.');
     });
 }
-
-
-
-// function hadleReadyClick(event) {
-//     const button = event.target;
-//     const orderId = button.dataset.orderId;
-//     const foodId = button.dataset.foodId;
-
-//     console.log("Ready Click - Order ID: ", orderId, "Food ID: ", foodId);  // Log IDs
-
-//     fetch('/shop/updateOrderStatusActive', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//             orderId: orderId,
-//             foodId: foodId,
-//             is_ready: true  // Send true as the new status
-//         })
-//     })
-//     .then(response => {
-//         console.log("Fetch Response: ", response);  // Log the raw response
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//     })
-//     .then(data => {
-//         console.log("Fetch Data: ", data);  // Log the parsed JSON data
-
-//         if (data.success) {
-//             alert('Order status updated successfully.');
-
-//             // Add the checkmark to the last column "Ready to deliver" only if is_ready is true
-//             const row = button.closest('tr');
-//             const readyDeliverCell = row.querySelector('.ready-deliver');
-//             readyDeliverCell.innerText = '✓'; // Add checkmark
-//             readyDeliverCell.style.color = 'green'; // Optional: make it green
-//         } else {
-//             alert('Failed to update order status.');
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Fetch Error: ', error);
-//         alert('Error updating order status.');
-//     });
-// }
 
 
 
