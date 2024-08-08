@@ -265,6 +265,7 @@ function viewOrder(order) {
             alert('Error updating order status.');
         });
     }
+
 function hadleReadyClick(event) {
     const button = event.target;
     const orderId = button.dataset.orderId;
@@ -278,7 +279,8 @@ function hadleReadyClick(event) {
         body: JSON.stringify({
             orderId: orderId,
             foodId: foodId,
-            is_ready: true  // Send true as the new status
+            is_ready: true,
+            status: 'Ready'  // Update status to "Ready"
         })
     })
     .then(response => {
@@ -297,13 +299,22 @@ function hadleReadyClick(event) {
             // Add the checkmark to the "Ready to deliver" column
             const row = button.closest('tr');
             const readyDeliverCell = row.querySelector('.ready-deliver');
-            
+            const timeInput = row.querySelector('.inputTime');
+            const timeTypeSelect = row.querySelector('.selectTime');
+
             if (readyDeliverCell) {
                 readyDeliverCell.innerText = '✓'; // Add checkmark
                 readyDeliverCell.style.color = 'green'; // Optional: make it green
-            } else {
-                console.error('Ready to deliver cell not found.');
             }
+
+            // Clear the input fields
+            timeInput.value = '';
+            timeTypeSelect.selectedIndex = 0;
+
+            // Also update the status cell if necessary
+            // Example:
+            // const statusCell = row.querySelector('.status-cell');
+            // statusCell.innerText = 'Ready';
 
         } else {
             alert('Failed to update order status.');

@@ -136,16 +136,16 @@ router.post('/shop/updateOrderStatus', checkNotAuthenticated(), async (req, res)
 
 
 router.post('/shop/updateOrderStatusActive', checkNotAuthenticated(), async (req, res) => {
-    const { orderId, foodId, is_ready } = req.body;
+    const { orderId, foodId, is_ready, status } = req.body;
     console.log("Request Body: ", req.body);  // Log the request body
 
     try {
         const query = `
             UPDATE orders
-            SET is_ready = $1 
-            WHERE order_id = $2 AND food_id = $3
+            SET is_ready = $1, status = $2 
+            WHERE order_id = $3 AND food_id = $4
         `;
-        const values = [is_ready, orderId, foodId];
+        const values = [is_ready, status, orderId, foodId];
         console.log("Query Values: ", values);  // Log the values being used in the query
 
         const result = await pool.query(query, values);
@@ -161,5 +161,6 @@ router.post('/shop/updateOrderStatusActive', checkNotAuthenticated(), async (req
         return res.status(500).json({ success: false });
     }
 });
+
 
 module.exports = router;
