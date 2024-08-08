@@ -24,7 +24,7 @@
 			"path": "views/shopUI/ordersTable.ejs",
 			"bookmarks": [
 				{
-					"line": 89,
+					"line": 90,
 					"column": 23,
 					"label": "shop-orders table"
 				}

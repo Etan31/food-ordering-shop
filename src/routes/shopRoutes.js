@@ -136,26 +136,30 @@ router.post('/shop/updateOrderStatus', checkNotAuthenticated(), async (req, res)
 
 
 router.post('/shop/updateOrderStatusActive', checkNotAuthenticated(), async (req, res) => {
-    const { orderId, foodId, status } = req.body;
-    console.log("Bodyactive: ", req.body);  // Check if this line logs
+    const { orderId, foodId, is_ready } = req.body;
+    console.log("Request Body: ", req.body);  // Log the request body
 
     try {
         const query = `
             UPDATE orders
-            SET status = $1
+            SET is_ready = $1 
             WHERE order_id = $2 AND food_id = $3
         `;
-        const values = [status, orderId, foodId];
+        const values = [is_ready, orderId, foodId];
+        console.log("Query Values: ", values);  // Log the values being used in the query
+
         const result = await pool.query(query, values);
+        console.log("Query Result: ", result);  // Log the query result
 
         if (result.rowCount > 0) {
-            res.json({ success: true });
+            return res.json({ success: true });
         } else {
-            res.json({ success: false });
+            return res.json({ success: false });
         }
     } catch (error) {
         console.error('Error updating order status:', error);
-        res.status(500).json({ success: false });
+        return res.status(500).json({ success: false });
     }
 });
+
 module.exports = router;
