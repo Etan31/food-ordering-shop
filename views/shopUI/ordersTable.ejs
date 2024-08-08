@@ -31,7 +31,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                  
                     <% orders.forEach((order, index) => { %>
                         <tr onclick="viewOrder(<%= JSON.stringify(order) %>)">
                             <td><%= order.name %></td>
@@ -96,10 +95,12 @@
 
     </div>
 
-<div class="total">
-<label for="">Total:</label>
-<input type="text" value="P1400" readonly>
-</div>
+<% orders.forEach((order) => { %>
+    <div class="total">
+        <label for="">Total for Order:</label>
+        <input type="text" value="P<%= order.total %>" readonly>
+    </div>
+<% }) %>
 
 
 

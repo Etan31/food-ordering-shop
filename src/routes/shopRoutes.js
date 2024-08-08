@@ -139,7 +139,7 @@ router.post('/shop/updateOrderStatusActive', checkNotAuthenticated(), async (req
     const { orderId, foodId, is_ready, status } = req.body;
 
     try {
-        // This update the order as ready to be delivered
+        // This update the order as ready to be delivered"
         const query = `
             UPDATE orders
             SET is_ready = $1, status = $2 
