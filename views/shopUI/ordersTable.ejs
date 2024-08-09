@@ -55,7 +55,6 @@
         </div>
 
         <div class="tops">
-
       
             <div class="sub-top">
                 <label for="">Name:</label>
@@ -106,7 +105,7 @@
 
 <div class= "button-wrapper">
     <!-- <button style="background-color: #FF6464;">Cancel</button> -->
-    <button style="background-color: #63FF73;">Deliver</button>
+    <button style="background-color: #63FF73;" onclick="deliver_order()">Deliver</button>
 </div>
 
 
@@ -117,7 +116,7 @@
    </main>
     <script>
 function viewOrder(order) {
-    console.log(order);
+    // console.log(order);
 
     const mainTable = document.querySelector('.data-wrapper1');
     const backBtn = document.getElementById('back');
@@ -283,18 +282,18 @@ function hadleReadyClick(event) {
             orderId: orderId,
             foodId: foodId,
             is_ready: true,
-            status: 'Ready'  // Update status to "Ready"
+            status: 'Ready'
         })
     })
     .then(response => {
-        console.log("Fetch Response Status:", response.status);
+        // console.log("Fetch Response Status:", response.status);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
         return response.json();
     })
     .then(data => {
-        console.log("Fetch Data: ", data);  // Log the parsed JSON data
+        // console.log("Fetch Data: ", data);  // Log the parsed JSON data
 
         if (data.success) {
             alert('Order status updated successfully.');
@@ -322,6 +321,46 @@ function hadleReadyClick(event) {
         alert('Error updating order status.');
     });
 }
+
+function deliver_order() {
+    const rows = document.querySelectorAll("#order-table tbody tr");
+
+    // Iterate through each row to get the order and food id that is ready to be deliver
+    rows.forEach(row => {
+        const preparingButton = row.querySelector("button[data-order-id]");
+        
+        // Extract the order_id and food_id from the table
+        const orderId = preparingButton.dataset.orderId;
+        const foodId = preparingButton.dataset.foodId;
+
+        // console.log(`Order ID: ${orderId}, Food ID: ${foodId}`);
+        fetch('/shop/deliver_and_delete', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                orderId: orderId,
+                foodId: foodId,
+                status: 'Delivering'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('The order is now delivering .');
+
+            } else {
+                alert('Error delivering');
+            }
+        })
+        .catch(error => {
+            console.error('Fetch Error: ', error);
+            alert('Error updating order status.');
+        });
+    });
+}
+
 
 
 

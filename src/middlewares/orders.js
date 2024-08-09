@@ -20,7 +20,7 @@ const getOrders = async (req, res, next) => {
             customers.push(order.user_id)
         } else {
             let existingorder = indivOrders[customers.indexOf(order.user_id)]
-            console.log("ex", existingorder, customers, customers.indexOf(order.user_id))
+            // console.log("ex", existingorder, customers, customers.indexOf(order.user_id))
             existingorder.itemNum++
             existingorder.total += parseInt(order.total_payment)
             existingorder.orders.push(order)
@@ -29,7 +29,7 @@ const getOrders = async (req, res, next) => {
     })
 
     res.locals.orders = indivOrders
-    // console.log("orders.js:", indivOrders, customers)
+    console.log("orders.js:" + JSON.stringify(indivOrders, null, 2), "customer_userId: " + customers);
     next()
     } catch (error) {
         throw error
