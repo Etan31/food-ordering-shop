@@ -1,34 +1,42 @@
 @import url('/css/sellerMain.css');
 
+:root {
+    --main-bg: #FBAB7E;
+    --primary: #d10000;
+    --background-bg: linear-gradient(62deg, #fbac7eb4 0%, #f7cf68d5 100%);
+}
 
 
-.data-wrapper2{
+.data-wrapper2 {
     width: 90%;
     height: 90%;
     margin-top: 20px;
     display: flex;
-    position: absolute; /* or position: fixed; */
+    position: absolute;
     top: 50%;
     background-color: #F4E1DB;
-    flex-direction: row;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-padding: 20px;
+    padding: 20px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow-y: auto;
 }
-.left{
+
+.left {
     width: 40%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-  
 }
 
-
-.image-container{
-    width: 80%;
- padding: 20px;
+.image-container {
+    width: 90%;
+    max-width: 320px;
+    height: 80%;
+    padding: 20px;
     background-color: #F6F6F6;
     border-radius: 10px;
     display: flex;
@@ -36,34 +44,40 @@ padding: 20px;
     justify-content: center;
     align-items: center;
 }
-.image-container img{
-    width: 280px;
-    height: 300px;
+
+.image-container img {
+    width: clamp(100px, 25vw, 240px);
+    height: clamp(150px, 25vw, 250px);
     border-radius: 10px;
 }
 
-.upload-button{
-   
-font-size: 18px;
-background-color: #d9d9d9;
-border-radius: 10px;
-padding: 15px;
-font-weight: bold;
+.upload-button {
+    font-size: clamp(15px, 1vw, 22px);
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    padding: clamp(5px, 1vw, 15px);
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    display: flex;
 }
-.uploadBtn{
-    margin-top: 30px;
+
+.uploadBtn {
+    margin-top: 55px;
     cursor: pointer;
     margin-bottom: 20px;
 }
 
-.right{
+.right {
     width: 60%;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 44%;
 }
-.sub-right{
-    width: 80%;
+
+.sub-right {
+    width: 100%;
+    max-width: 450px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
@@ -72,34 +86,56 @@ font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 5px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-.sub-right label{
+.sub-right label {
     font-size: 16px;
     font-weight: bold;
+    width: 40%;
 }
-.sub-right input{
-    width:350px;
+.sub-right input {
+    width: 350px;
     height: 20px;
-    margin-left: 20px;
+    margin-left: 15px;
     border: none;
 }
 
-.button-wrapper{
+.button-wrapper {
     display: flex;
-    justify-content: end;
-    width: 80%;
-    margin-top: 250px;
-    margin-left: auto;
-    margin-right: auto;
-    gap: 20px;
+    justify-content: center;
+    /* width: 80%; */
+    /* margin-top: 250px; */
+    gap: clamp(5px, 2vw, 20px);
 }
-.button-wrapper button{
-    padding: 10px;
-    width: 150px;
+
+.button-wrapper button {
+    padding-inline: clamp(5px, 4vw, 39px) !important;
+    width: 100%;
+    max-width: 170px;
     border-radius: 10px;
-    border: none;
     cursor: pointer;
+    background-color: transparent;
     font-weight: bold;
+    height: 30px;
+}
+
+.cancelBtn-menu {
+    border: 1px solid var(--primary);
+}
+
+.saveBtn-menu {
+    background-image: var(--background-bg);
+    border: none;
+    box-shadow: 0 0.2rem 0.25rem rgba(0, 0, 0, 0.2);
+}
+
+
+@media (max-width: 531px) {
+    .data-wrapper2 {
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 20px;
+    }
 }
