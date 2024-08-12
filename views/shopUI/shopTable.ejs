@@ -70,7 +70,6 @@
     event.preventDefault(); // Prevent the default form submission
 
     const formData = new FormData(this);
-    console.log("Form details: ", formData)
 
     try {
         const response = await fetch(this.action, {
