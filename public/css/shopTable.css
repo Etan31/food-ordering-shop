@@ -6,6 +6,11 @@
     --background-bg: linear-gradient(62deg, #fbac7eb4 0%, #f7cf68d5 100%);
 }
 
+.h2update-info{
+    font-size: large;
+    padding-block: 10px;
+    font-family: 'Times New Roman', Times, serif ;
+}
 
 .data-wrapper2 {
     width: 90%;
@@ -37,6 +42,7 @@
     max-width: 320px;
     height: 80%;
     padding: 20px;
+    padding-bottom: unset;
     background-color: #F6F6F6;
     border-radius: 10px;
     display: flex;
@@ -137,5 +143,8 @@
         flex-wrap: nowrap;
         align-items: center;
         gap: 20px;
+    }
+    .h2update-info {
+        padding-block: 5px;
     }
 }

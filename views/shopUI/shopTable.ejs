@@ -15,7 +15,7 @@
 
         <%- include('sellerNavbar.ejs') %>
 
-        <form action="/shop/update-info" method="post" enctype="multipart/form-data">
+        <form action="/shop/update-info" id="updateForm" method="post" enctype="multipart/form-data">
             <div class="data-wrapper2">
                 <div class="left">
                     <div class="image-container">
@@ -31,23 +31,24 @@
                     </div>
                 </div>
                 <div class="right">
+                    <h2 class="h2update-info">Update shop information</h2>
 
                     <div class="sub-right">
                         <label for="">Shop Name:</label>
-                        <input type="text" name="name">
+                        <input type="text" name="name"  value='<%= data.shopname %>'>
                     </div>
                     <div class="sub-right">
                         <label for="">Address:</label>
-                        <input type="text" name="add">
+                        <input type="text" name="add" value='<%= data.address %>'>
                     </div>
                     <div class="sub-right">
                         <label for="">Email:</label>
-                        <input type="text" name="email">
+                        <input type="text" name="email" value='<%= data.email %>'>
                     </div>
 
                 </div>
                     <div class="button-wrapper">
-                        <button type="button" class="cancelBtn-menu" onclick="">Back</button>
+                        <button type="button" class="cancelBtn-menu" onclick="location.href='/dashboard_seller'">Back</button>
                         <button type="submit" class="saveBtn-menu">Save</button>
                     </div>
             </div>
@@ -62,17 +63,47 @@
             </div>
 
     </main>
-    <script>        
-        function showUploadedImage(event) {
-            const input = event.target;
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('uploadedImage').src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
+    <script> 
+    
+    // 
+    document.getElementById('updateForm').onsubmit = async function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(this);
+    console.log("Form details: ", formData)
+
+    try {
+        const response = await fetch(this.action, {
+            method: this.method,
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Information updated successfully');
+            window.location.href = result.redirectUrl;
+        } else {
+            alert('Failed to update information: ' + result.error);
+        }
+    } catch (error) {
+        alert('An unexpected error occurred: ' + error.message);
+    }
+};
+    
+    // foor showing the uploaded image
+    function showUploadedImage(event) {
+        const input = event.target;
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('uploadedImage').src = e.target.result;
             }
-        }</script>
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+        
+    </script>
 
 </body>
 

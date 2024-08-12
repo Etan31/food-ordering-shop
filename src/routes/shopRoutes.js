@@ -77,24 +77,26 @@ router.post('/menu/add', upload.single('menuImage'), checkNotAuthenticated() , a
          res.status(500).send('Error uploading file');
      }
  });
-router.post('/shop/update-info', upload.single('shopLogo'), checkNotAuthenticated() , async (req, res) => {
-     const { name, add, email} = req.body;
-     const menuImage = req.file.filename;
-     const user_id = req.user.user_id;
-     let shopname = 'Premea_Hotel'
- 
-     try {
-         const query = `Update shop_name SET shopname = $1, logo = $2 where user_id = $3`
-         const query1 = `Update users SET address = $1, email = $2 where user_id = $3`
-       
-         await pool.query(query, [name, menuImage, user_id]);    
-         await pool.query(query1, [add, email, user_id]);    
-         res.status(200).send('<script>window.location.href = "/shop/shopTable";</script>');
-     } catch (error) {
-         console.error('Error executing query', error);
-         res.status(500).send('Error uploading file');
-     }
- });
+
+router.post('/shop/update-info', upload.single('shopLogo'), checkNotAuthenticated(), async (req, res) => {
+    const { name, add, email } = req.body;
+    const menuImage = req.file.filename;
+    const user_id = req.user.user_id;
+
+    try {
+        const query = `UPDATE shop_name SET shopname = $1, logo = $2 WHERE user_id = $3`;
+        const query1 = `UPDATE users SET address = $1, email = $2 WHERE user_id = $3`;
+
+        await pool.query(query, [name, menuImage, user_id]);    
+        await pool.query(query1, [add, email, user_id]);
+
+        res.status(200).json({ success: true, redirectUrl: "/shop/shopTable" });
+    } catch (error) {
+        console.error('Error executing query', error);
+        res.status(500).json({ success: false, error: 'Error uploading file' });
+    }
+});
+
 
 router.delete('/menu/delete', checkNotAuthenticated(), async(req, res) => {
      try {
