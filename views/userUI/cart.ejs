@@ -83,11 +83,11 @@
 
       <div class="formHead">
         <div>
-          <input type="radio" id="deliveryCheckbox" name="mode" value="delivery" style="width: 20px; height:20px;">
+          <input type="radio" id="deliveryCheckbox" name="mode" value="delivery" style="width: 20px; height:20px;" onchange="toggleAddressRequirement()">
           <label for="deliveryCheckbox">Deliver</label>
         </div>
         <div>
-          <input type="radio" id="pickupCheckbox" name="mode" value="pick-up" style="width: 20px; height:20px;">
+          <input type="radio" id="pickupCheckbox" name="mode" value="pick-up" style="width: 20px; height:20px;" onchange="toggleAddressRequirement()">
           <label for="pickupCheckbox">Pick up</label>
         </div>
       </div>
@@ -114,6 +114,8 @@
 
       <div class="button-wrapper">
         <button class="proceedBtn" type="button" id="cancelButton">Cancel</button>
+
+        <!-- function submitBtn() -->
         <button class="proceedBtn" type="button" id="confirmButton" style="background-color: #F9E2A7;">Confirm and Go to Payment</button>
       </div>
     </div>
@@ -151,6 +153,8 @@
         </div>
 
         <button class="cancelBtn" id="goBackButton">Go back</button>
+
+        <!--  function ok()  -->
         <button class="proceedBtn checkout" id="okBtn" style="background-color: #F9E2A7;">Checkout</button>
       </div>
     </div>

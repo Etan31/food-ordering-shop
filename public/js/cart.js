@@ -20,6 +20,8 @@ function cancelBtn() {
  function submitBtn() {
     const modal = document.getElementById('modal1');
     const modal2 = document.getElementById('modal2');
+    
+    toggleAddressRequirement();
 
     if (document.querySelector('.orderForm').checkValidity()) {
       // If valid, display the second modal
@@ -86,6 +88,19 @@ function cancelBtn() {
 
 
 
+function toggleAddressRequirement() {
+  const deliveryCheckbox = document.getElementById('deliveryCheckbox');
+  const deliveryAddress = document.getElementById('deliveryAddress');
+
+  if (deliveryCheckbox.checked) {
+    deliveryAddress.setAttribute('required', 'required');
+  } else {
+    deliveryAddress.removeAttribute('required');
+  }
+}
+
+// Call toggleAddressRequirement on page load to handle pre-selected options (if any)
+window.onload = toggleAddressRequirement;
 
 
 
