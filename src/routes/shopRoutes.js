@@ -25,6 +25,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
+ router.get('/bufpay-user/about', checkNotAuthenticated(), async (req, res) => {
+    res.render("shopUI/about.ejs");
+});
 
 router.get('/dashboard_seller', checkNotAuthenticated(), async(req, res) => {
      res.render("shopUI/dashboard_seller.ejs");
@@ -78,24 +81,51 @@ router.post('/menu/add', upload.single('menuImage'), checkNotAuthenticated() , a
      }
  });
 
+
+//for updating shop information
 router.post('/shop/update-info', upload.single('shopLogo'), checkNotAuthenticated(), async (req, res) => {
     const { name, add, email } = req.body;
-    const menuImage = req.file.filename;
+    const menuImage = req.file ? req.file.filename : undefined; // Check if file is provided
     const user_id = req.user.user_id;
 
     try {
-        const query = `UPDATE shop_name SET shopname = $1, logo = $2 WHERE user_id = $3`;
-        const query1 = `UPDATE users SET address = $1, email = $2 WHERE user_id = $3`;
+        await pool.query('BEGIN'); // Start transaction
 
-        await pool.query(query, [name, menuImage, user_id]);    
+        // Retrieve the current shopname
+        const result = await pool.query('SELECT shopname FROM shop_name WHERE user_id = $1', [user_id]);
+        if (result.rows.length === 0) {
+            throw new Error('Shop not found');
+        }
+
+        const oldShopName = result.rows[0].shopname;
+
+        // Conditionally update the shop_name table based on the presence of menuImage
+        if (menuImage) {
+            const query = `UPDATE shop_name SET shopname = $1, logo = $2 WHERE user_id = $3`;
+            await pool.query(query, [name, menuImage, user_id]);
+        } else {
+            const query = `UPDATE shop_name SET shopname = $1 WHERE user_id = $2`;
+            await pool.query(query, [name, user_id]);
+        }
+
+        // Update the menus table
+        const query2 = `UPDATE menus SET shopname = $1 WHERE shopname = $2`;
+        await pool.query(query2, [name, oldShopName]);
+
+        // Update the users table
+        const query1 = `UPDATE users SET address = $1, email = $2 WHERE user_id = $3`;
         await pool.query(query1, [add, email, user_id]);
+
+        await pool.query('COMMIT'); // Commit transaction
 
         res.status(200).json({ success: true, redirectUrl: "/shop/shopTable" });
     } catch (error) {
+        await pool.query('ROLLBACK'); // Rollback transaction on error
         console.error('Error executing query', error);
-        res.status(500).json({ success: false, error: 'Error uploading file' });
+        res.status(500).json({ success: false, error: 'Error updating shop information' });
     }
 });
+
 
 
 router.delete('/menu/delete', checkNotAuthenticated(), async(req, res) => {

@@ -4,6 +4,14 @@
     padding:0px;
 }
 
+:root {
+    --main-bg: #FBAB7E;
+    --primary: #d10000;
+    --background-bg: linear-gradient(62deg, #fbac7eb4 0%, #f7cf68d5 100%);
+    --background-bg-20: linear-gradient(62deg, rgba(251, 172, 126, 0.55) 0%, rgba(247, 207, 104, 0.55) 100%);
+
+}
+
 
 
 /*Navbar Functionality*/
@@ -301,7 +309,8 @@ h1{
     width: 100%;
     overflow:visible;
     border: #f4f4f4;
-    background-color: bisque;
+    /* background-color: var(--background-bg); */
+    background-image: var(--background-bg-20);
     background-size: 50%;
     font-size: large;
     padding: 20px;

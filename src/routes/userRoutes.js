@@ -110,8 +110,6 @@ router.get('/bufpay-user/cart', checkNotAuthenticated(), generateOrderId, async 
  
  router.get('/bufpay-user/about', checkNotAuthenticated(), async (req, res) => {
 
-
-
     res.render("userUI/about.ejs");
 
 });
