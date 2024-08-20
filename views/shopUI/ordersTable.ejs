@@ -26,6 +26,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Address</th>
+                        <th>delivery pickup date & time</th>
                         <th>Number of items in order</th>
                         <th>order total:</th>
                     </tr>
@@ -35,6 +36,7 @@
                         <tr onclick="viewOrder(<%= JSON.stringify(order) %>)">
                             <td><%= order.name %></td>
                             <td><%= order.address %></td>
+                             <td><%= new Date(order.delivery_date).toLocaleString() %></td>
                             <td><%= order.itemNum %></td>
                             <td><%= order.total %></td>
                     </tr>
