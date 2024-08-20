@@ -45,15 +45,15 @@ router.get('/shop/menusTable', checkNotAuthenticated(), getMenuItems, async(req,
 })
 router.get('/shop/shopTable', checkNotAuthenticated(), async(req, res) => {
      try {
-          const {user_id} =req.user
+          const {user_id} = req.user
           const query = `SELECT shop_name.*, users.address, users.email
                          FROM shop_name
                          LEFT JOIN users ON shop_name.user_id = users.user_id
                          WHERE shop_name.user_id = $1`     
           const {rows: data} = await pool.query(query, [user_id])
-          console.log(data, user_id)
+        //   console.log(data, user_id)
 
-          console.log(data)   
+        //   console.log(data)   
           res.render("shopUI/shopTable.ejs", {data: data[0]});
 
      } catch (error) {
@@ -61,25 +61,38 @@ router.get('/shop/shopTable', checkNotAuthenticated(), async(req, res) => {
      }
 })
 
+router.post('/menu/add', upload.single('menuImage'), checkNotAuthenticated(), async (req, res) => {
+    const { name, unit, price } = req.body;
+    const menuImage = req.file.filename;
+    const menuId = req.menuId;
+    const user_id = req.user.user_id;
 
-router.post('/menu/add', upload.single('menuImage'), checkNotAuthenticated() , async (req, res) => {
-     const { name, unit, price} = req.body;
-     const menuImage = req.file.filename;
-     const menuId = req.menuId;
-     const user_id = req.user.user_id;
-     let shopname = 'Premea_Hotel'
- 
-     try {
-         const query = `INSERT INTO menus (menu_id, name, price, image, seller_id, shopname, unit)
-             VALUES ($1, $2, $3, $4, $5, $6, $7)`
-         const values = [menuId, name, price, menuImage, user_id, shopname, unit];
-         await pool.query(query, values);    
-         res.status(200).redirect('/shop/menusTable')
-     } catch (error) {
-         console.error('Error executing query', error);
-         res.status(500).send('Error uploading file');
-     }
- });
+    try {
+        // Retrieve the shop name based on the user ID
+        const shopQuery = 'SELECT shopname FROM shop_name WHERE user_id = $1';
+        const shopResult = await pool.query(shopQuery, [user_id]);
+
+        // Check if the shop name was found
+        if (shopResult.rows.length === 0) {
+            return res.status(400).send('Shop not found.');
+        }
+
+        const shopname = shopResult.rows[0].shopname;
+
+        // Insert the menu with the retrieved shop name
+        const insertQuery = `INSERT INTO menus (menu_id, name, price, image, seller_id, shopname, unit)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+        const insertValues = [menuId, name, price, menuImage, user_id, shopname, unit];
+        await pool.query(insertQuery, insertValues);
+
+        res.status(200).redirect('/shop/menusTable');
+    } catch (error) {
+        console.error('Error executing query', error);
+        res.status(500).send('Error uploading file');
+    }
+});
+
+
 
 
 //for updating shop information
@@ -144,7 +157,7 @@ router.delete('/menu/delete', checkNotAuthenticated(), async(req, res) => {
 
 router.post('/shop/updateOrderStatus', checkNotAuthenticated(), async (req, res) => {
     const { orderId, foodId, status } = req.body;
-    console.log("Body: ", req.body);  // Check if this line logs
+    // console.log("Body: ", req.body);  // Check if this line logs
 
     try {
         const query = `

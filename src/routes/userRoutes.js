@@ -40,7 +40,7 @@ router.get('/shop/getdishes', checkNotAuthenticated() , async(req, res) => {
     
      const {shop} = req.query
 
-     console.log("shoppp", shop)
+    //  console.log("shoppp", shop)
 
 
      try {
@@ -51,8 +51,8 @@ router.get('/shop/getdishes', checkNotAuthenticated() , async(req, res) => {
           const query1 = `SELECT * FROM shop_name`
           const { rows } = await pool.query(query, [shop]);
           const { rows: shops } = await pool.query(query1);
-          console.log("shoppp", "fgfgfg ")
-          console.log(rows)
+          // console.log("shoppp", "fgfgfg ")
+          // // console.log(rows)
 
 
           res.render("userUI/home.ejs", { menus: rows , shops: shops});
@@ -66,7 +66,7 @@ router.get('/shop/getdishes', checkNotAuthenticated() , async(req, res) => {
 router.get('/bufpay-user/cart', checkNotAuthenticated(), generateOrderId, async (req, res) => {
   const user_id = req.user.user_id;
 
-  console.log("user", user_id);
+  // console.log("user", user_id);
   const query = `
       SELECT cart.*, menus.* 
       FROM cart 
@@ -206,9 +206,9 @@ router.post('/save-order', checkNotAuthenticated(), generateOrderId, upload.none
     const orderID = req.orderId;
     const user_id = req.user.user_id;
 
-    console.log("orderID:", orderID);
-    console.log("user:", user_id);
-    console.log("transaction_num:", transaction_num);
+    // console.log("orderID:", orderID);
+    // console.log("user:", user_id);
+    // console.log("transaction_num:", transaction_num);
 
     const getCart = `SELECT cart.*, menus.price
                      FROM cart 

@@ -29,7 +29,7 @@ const getOrders = async (req, res, next) => {
     })
 
     res.locals.orders = indivOrders
-    console.log("orders.js:" + JSON.stringify(indivOrders, null, 2), "customer_userId: " + customers);
+    // console.log("orders.js:" + JSON.stringify(indivOrders, null, 2), "customer_userId: " + customers);
     next()
     } catch (error) {
         throw error

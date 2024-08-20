@@ -7,7 +7,7 @@ const getMenuItems = async(req, res, next) => {
     const {user_id} = req.user
     const {rows: menus} = await pool.query(query, [user_id])
     res.locals.menus = menus
-    console.log(menus)
+    // console.log(menus)
     next()
     } catch (error) {
         throw error
