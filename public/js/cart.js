@@ -41,7 +41,13 @@ function cancelBtn() {
   function ok() {
     const form = document.getElementById('orderForm');
     const formData = new FormData(form);
-    const trakNum = document.getElementById('trakNum').value;
+    const trakNum = document.getElementById('trakNum').value.trim();
+
+    if (!trakNum) {
+      alert("Please enter your Gcash reference number before checking out.");
+      return;
+    }
+
     formData.append('transaction_num', trakNum);
 
     fetch('/save-order', {
