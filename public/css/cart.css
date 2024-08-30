@@ -390,7 +390,7 @@ h2{
 
 }
 .quantity {
-    font-size: clamp(12px, 2vw, 20px);
+    /* font-size: clamp(12px, 2vw, 20px); */
     text-align: center;
     border: none;
     width: 30%; /* Adjust the width as needed */

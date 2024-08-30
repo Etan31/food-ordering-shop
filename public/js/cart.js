@@ -20,8 +20,14 @@ function cancelBtn() {
  function submitBtn() {
     const modal = document.getElementById('modal1');
     const modal2 = document.getElementById('modal2');
+    const photoValid = document.querySelector('.uploadID input[type="file"]');
     
     toggleAddressRequirement();
+
+     if (!photoValid.files.length) {
+        alert('Please upload a valid ID photo.');
+        return;
+    }
 
     if (document.querySelector('.orderForm').checkValidity()) {
       // If valid, display the second modal
@@ -34,52 +40,77 @@ function cancelBtn() {
     }
   }
 
+   document.getElementById('confirmButton').addEventListener('click', submitBtn);
+
   // Attach event listener to the confirm button
-  document.getElementById('confirmButton').addEventListener('click', submitBtn);
+function formatTrakNum(input) {
+  // Remove any non-digit characters
+  let cleaned = input.replace(/\D/g, '');
 
-  // Function to handle form submission and delete orders
-  function ok() {
-    const form = document.getElementById('orderForm');
-    const formData = new FormData(form);
-    const trakNum = document.getElementById('trakNum').value.trim();
+  // Limit to exactly 13 digits
+  cleaned = cleaned.substring(0, 13);
 
-    if (!trakNum) {
-      alert("Please enter your Gcash reference number before checking out.");
-      return;
-    }
+  // Format as "1234 567 123457"
+  let formatted = cleaned.replace(/(\d{4})(\d{3})(\d{6})/, '$1 $2 $3');
 
-    formData.append('transaction_num', trakNum);
+  return formatted;
+}
 
-    fetch('/save-order', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (response.ok) {
-        return fetch('/bufpay-user/deleteAllOrders', {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-      } else {
-        throw new Error('Order submission failed');
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        alert("Your order is now processing");
-        window.location.href = "/bufpay-home";
-      } else {
-        console.error('Deleting all orders failed');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+document.getElementById('trakNum').addEventListener('input', function(event) {
+  const input = event.target;
+  const formattedValue = formatTrakNum(input.value);
+
+  // Set the formatted value back to the input
+  input.value = formattedValue;
+
+  // Move the cursor to the end of the input
+  const cursorPosition = formattedValue.length;
+  input.setSelectionRange(cursorPosition, cursorPosition);
+});
+
+function ok() {
+  const form = document.getElementById('orderForm');
+  const formData = new FormData(form);
+  const trakNum = document.getElementById('trakNum').value.replace(/\s+/g, ''); // Remove spaces before sending
+
+  if (trakNum.length !== 13) {
+    alert("Please enter a valid 13-digit Gcash reference number before checking out.");
+    return;
   }
 
-  document.getElementById('okBtn').addEventListener('click', ok);
+  formData.append('transaction_num', trakNum);
+
+  fetch('/save-order', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      return fetch('/bufpay-user/deleteAllOrders', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } else {
+      throw new Error('Order submission failed');
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      alert("Your order is now processing");
+      window.location.href = "/bufpay-home";
+    } else {
+      console.error('Deleting all orders failed');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+document.getElementById('okBtn').addEventListener('click', ok);
+
 
   // Attach event listener to the go back button to return to the first modal
   document.getElementById('goBackButton').addEventListener('click', () => {
@@ -198,28 +229,53 @@ function deleteBtn(food_id) {
 
 // Function to handle quantity change
 function handleQuantityChange(event, food_id) {
-  const newQuantity = event.target.value; // Get the new quantity
-  const data = {
-      food_id: food_id,
-      quantity: newQuantity
-  };
+    const newQuantity = parseFloat(event.target.value); // Get the new quantity as a float
+    const pricePerUnit = parseFloat(event.target.getAttribute('data-price')); // Get the price per unit
+    const newPrice = newQuantity * pricePerUnit; // Calculate the new price for the selected quantity
 
-  // Send updated quantity to the server to update in the database
-  fetch('/bufpay-user/updateQuantity', {
-      method: 'PUT', // Use PUT method to update data
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-  })
-  .then(response => {
-      if (response.ok) {
-          console.log('Quantity updated successfully');
-      } else {
-          console.error('Updating quantity failed');
-      }
-  })
-  .catch(error => {
-      console.error('Error:', error);
-  });
+    // Update the displayed price for this item
+    const priceCell = event.target.closest('tr').querySelector('.price');
+    priceCell.textContent = newPrice.toFixed(2); // Update price with 2 decimal places
+
+    // Update the total price
+    updateTotalPrice();
+
+    const data = {
+        food_id: food_id,
+        quantity: newQuantity
+    };
+
+    // Send updated quantity to the server to update in the database
+    fetch('/bufpay-user/updateQuantity', {
+        method: 'PUT', // Use PUT method to update data
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Quantity updated successfully');
+        } else {
+            console.error('Updating quantity failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function updateTotalPrice() {
+    let totalPrice = 0;
+
+    // Iterate over each row in the order table
+    document.querySelectorAll('.orderTable tbody tr').forEach(row => {
+        const quantity = parseFloat(row.querySelector('.quantity').value);
+        const pricePerUnit = parseFloat(row.querySelector('.quantity').getAttribute('data-price'));
+        const price = quantity * pricePerUnit;
+        totalPrice += price;
+    });
+
+    // Update the total price label
+    document.getElementById('totalPrice').textContent = totalPrice.toFixed(2) + ' Pesos';
 }

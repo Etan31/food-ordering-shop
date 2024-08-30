@@ -201,19 +201,17 @@ router.put('/bufpay-user/updateQuantity', checkNotAuthenticated(), async (req, r
 
 
 router.post('/save-order', checkNotAuthenticated(), generateOrderId, upload.none(), async (req, res) => {
+  const client = await pool.connect();
   try {
     const { mode, name, contactNumber, deliveryAddress, date_time, transaction_num } = req.body;
     const orderID = req.orderId;
     const user_id = req.user.user_id;
 
-    // console.log("orderID:", orderID);
-    // console.log("user:", user_id);
-    // console.log("transaction_num:", transaction_num);
-
     const getCart = `SELECT cart.*, menus.price
                      FROM cart 
                      LEFT JOIN menus ON cart.food_id = menus.menu_id
                      WHERE cart.user_ids = $1`;
+
     const query = `INSERT INTO orders (order_id, food_id, user_id, mode_delivery, total_payment, delivery_pickup_date, seller_id, cust_name, contact, address, quantity, transaction_num) 
                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
 
@@ -221,16 +219,35 @@ router.post('/save-order', checkNotAuthenticated(), generateOrderId, upload.none
 
     console.log("cart: ", cart);
 
+    await client.query('BEGIN');
     for (const item of cart) {
-      await pool.query(query, [orderID, item.food_id, user_id, mode, item.quantity * item.price, date_time, item.seller_id, name, contactNumber, deliveryAddress, item.quantity, transaction_num]);
+      await client.query(query, [
+        orderID,
+        item.food_id,
+        user_id,
+        mode,
+        item.quantity * item.price, // Total payment calculation
+        date_time,
+        item.seller_id,
+        name,
+        contactNumber,
+        deliveryAddress,
+        item.quantity, // BIGINT quantity
+        transaction_num
+      ]);
     }
+    await client.query('COMMIT');
 
     res.status(200).send({ success: true, message: 'Order saved successfully' });
   } catch (error) {
+    await client.query('ROLLBACK');
     console.error(error);
     res.status(500).send({ success: false, message: 'An error occurred while saving the order' });
+  } finally {
+    client.release();
   }
 });
+
 
 
 

@@ -48,11 +48,15 @@
 
               <% orders.forEach(foods => { %>
               <tr>
-
                 <td><%= foods.name %> <br> <%= foods.shopname %></td>
-                <!-- Add a data attribute to store the original price -->
-                <td> <input type="number" class="quantity" data-price="<%= foods.price %>" value="<%= foods.quantity %>"
-                    onchange="handleQuantityChange(event, '<%= foods.food_id %>')"></td>
+                <td>
+                  <select class="quantity" data-price="<%= foods.price %>"
+                    onchange="handleQuantityChange(event, '<%= foods.food_id %>')">
+                    <% for (let i = 0.5; i <= 50; i += 0.5) { %>
+                    <option value="<%= i %>" <%= i === foods.quantity ? 'selected' : '' %>><%= i %></option>
+                    <% } %>
+                  </select>
+                </td>
                 <td class="price"><%= foods.price %></td>
                 <td class="deleteBtn" onclick="deleteBtn('<%= foods.food_id%>')"><i class="fa-solid fa-trash"></i></td>
               </tr>
@@ -108,8 +112,8 @@
       </div>
       <hr class="horizontal-line" style="width: 100%;">
       <div class="uploadID">
-        <label for="" class="formlabel">Upload Valid I.D</label>
-        <input type="file">
+        <label for="" class="formlabel" >Upload Valid I.D</label>
+        <input type="file" required>
       </div>
 
       <div class="button-wrapper">
@@ -149,7 +153,7 @@
 
         <div class="wrapperReview inputNumTracker">
           <p>Gcash reference number:</p>
-          <input type="number" class="trakNumber" id="trakNum" placeholder="Tracking number" required />
+           <input type="text" class="trakNumber" id="trakNum" placeholder="Tracking number" maxlength="16" required />
         </div>
 
         <button class="cancelBtn" id="goBackButton">Go back</button>
